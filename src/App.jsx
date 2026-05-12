@@ -48,7 +48,7 @@ export default function App() {
           <a href="#pricing" className="tl-nav__link" onClick={closeMenu}>
             Pricing
           </a>
-          <a href="#" className="tl-btn-download" onClick={closeMenu}>
+          <a href="#" className="tl-btn-download tl-btn-download--pulse" onClick={closeMenu}>
             Download
           </a>
         </nav>
@@ -91,28 +91,30 @@ export default function App() {
               ✓ Free 14-day trial &nbsp; ✓ No credit card required &nbsp; ✓ Built by a trucker
             </p>
           </div>
-          <PhoneMock>
-            <div className="tl-dash-stat">
-              <span>Gross Revenue</span>
-              <span>$12,400</span>
-            </div>
-            <div className="tl-dash-stat">
-              <span>Fuel Cost</span>
-              <span>-$3,200</span>
-            </div>
-            <div className="tl-dash-stat tl-dash-stat--profit">
-              <span>Net Profit</span>
-              <span>$7,847</span>
-            </div>
-            <div className="tl-dash-stat">
-              <span>True Rate/Mile</span>
-              <span>$1.86</span>
-            </div>
-            <div className="tl-dash-stat">
-              <span>Deadhead</span>
-              <span>11%</span>
-            </div>
-          </PhoneMock>
+          <div className="tl-hero__phone-glow">
+            <PhoneMock>
+              <div className="tl-dash-stat">
+                <span>Gross Revenue</span>
+                <span>$12,400</span>
+              </div>
+              <div className="tl-dash-stat">
+                <span>Fuel Cost</span>
+                <span>-$3,200</span>
+              </div>
+              <div className="tl-dash-stat tl-dash-stat--profit">
+                <span>Net Profit</span>
+                <span>$7,847</span>
+              </div>
+              <div className="tl-dash-stat">
+                <span>True Rate/Mile</span>
+                <span>$1.86</span>
+              </div>
+              <div className="tl-dash-stat">
+                <span>Deadhead</span>
+                <span>11%</span>
+              </div>
+            </PhoneMock>
+          </div>
         </section>
 
         {/* Problem */}
@@ -146,7 +148,7 @@ export default function App() {
         </section>
 
         {/* Features */}
-        <section className="tl-section" id="features" style={{ background: 'var(--navy)' }} data-reveal>
+        <section className="tl-section tl-features" id="features" data-reveal>
           <div className="tl-section__inner">
             <div className="tl-feature-row">
               <div>
@@ -281,7 +283,7 @@ export default function App() {
               </div>
               <div className="tl-app-card__row">
                 <span>TRUE Rate</span>
-                <span>$1.78/mile</span>
+                <span className="tl-app-card__value--gold">$1.78/mile</span>
               </div>
               <div className="tl-app-card__row">
                 <span>Estimated Fuel</span>
@@ -292,7 +294,18 @@ export default function App() {
                 <span>$847</span>
               </div>
               <div className="tl-app-card__banner">
-                Deadhead 26% — above 20% threshold. Consider negotiating rate.
+                <span className="tl-app-card__banner-row">
+                  <span>Deadhead</span>
+                  <span className="tl-app-card__dh-group">
+                    <span className="tl-app-card__dh-pct">26%</span>
+                    <span className="tl-app-card__dh-alert" title="Above threshold">
+                      !
+                    </span>
+                  </span>
+                  <span className="tl-app-card__banner-msg">
+                    — above 20% threshold. Consider negotiating rate.
+                  </span>
+                </span>
               </div>
             </div>
             <p className="tl-viral__quote">I almost took this load. The app caught it before I did.</p>
