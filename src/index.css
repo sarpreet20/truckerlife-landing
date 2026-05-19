@@ -983,9 +983,11 @@ img {
 
 .tl-pricing__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   align-items: stretch;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 @media (max-width: 960px) {

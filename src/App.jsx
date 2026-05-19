@@ -338,7 +338,7 @@ export default function App() {
             <div className="tl-pricing__grid">
               <article className="tl-price-card">
                 <div className="tl-price-card__tier">FREE</div>
-                <p className="tl-price-card__amt">14 Days Full Access</p>
+                <p className="tl-price-card__amt">$0 · 14-day trial</p>
                 <ul>
                   <li>Voice logging</li>
                   <li>Load tracking</li>
@@ -353,7 +353,7 @@ export default function App() {
               <article className="tl-price-card tl-price-card--featured">
                 <span className="tl-price-card__badge">MOST POPULAR</span>
                 <div className="tl-price-card__tier">PRO</div>
-                <p className="tl-price-card__amt">$29 per month</p>
+                <p className="tl-price-card__amt">$29/mo</p>
                 <ul>
                   <li>Everything in Free</li>
                   <li>Unlimited loads</li>
@@ -365,21 +365,6 @@ export default function App() {
                 </ul>
                 <a className="tl-btn tl-btn--gold tl-btn-pulse" href="#">
                   Get Pro
-                </a>
-              </article>
-              <article className="tl-price-card">
-                <div className="tl-price-card__tier">PRO PLUS</div>
-                <p className="tl-price-card__amt">$49 per month</p>
-                <ul>
-                  <li>Everything in Pro</li>
-                  <li>Advanced AI insights</li>
-                  <li>Monthly business summary</li>
-                  <li>Rate negotiation tips</li>
-                  <li>Broker performance tracking</li>
-                  <li>Custom expense categories</li>
-                </ul>
-                <a className="tl-btn tl-btn--outline" href="#">
-                  Get Pro Plus
                 </a>
               </article>
             </div>
