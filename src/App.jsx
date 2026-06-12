@@ -1,16 +1,352 @@
 import { useEffect, useState } from 'react'
 
-function PhoneMock({ children }) {
+const APP_STORE_URL = 'https://apps.apple.com/us/app/trucker-life-ai/id6769266788'
+
+const DASH_TILES = [
+  { label: 'Loads', sub: '3 this month', bg: '#2563eb', icon: 'briefcase' },
+  { label: 'Fuel', sub: '$6,180 this month', bg: '#f59e0b', icon: 'flame' },
+  { label: 'Maintenance', sub: '1 this month', bg: '#10b981', icon: 'wrench' },
+  { label: 'Accessorial', sub: '$132 this month', bg: '#8b5cf6', icon: 'plus' },
+  { label: 'Travel Expense', sub: '$74 this month', bg: '#ef4444', icon: 'pin' },
+  { label: 'Reports', sub: 'May 2026', bg: '#06b6d4', icon: 'chart' },
+]
+
+function TileIcon({ name }) {
+  const props = { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', stroke: '#fff', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }
+  switch (name) {
+    case 'briefcase':
+      return (
+        <svg {...props}>
+          <rect x="3" y="7" width="18" height="13" rx="2" />
+          <path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2" />
+        </svg>
+      )
+    case 'flame':
+      return (
+        <svg {...props}>
+          <path d="M12 22c4-2.5 7-6.5 7-11a7 7 0 00-7-7c-1.5 2-4 3.5-4 6.5 0 2 1.5 3.5 3 4.5-2-1-3.5-3-3.5-5.5 0-3 2.5-5.5 5-7.5-3 1.5-5 4.5-5 8 0 5 3.5 9 5 10.5z" />
+        </svg>
+      )
+    case 'wrench':
+      return (
+        <svg {...props}>
+          <path d="M14.7 6.3a4 4 0 00-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 005.4-5.4l-2.2 2.2-3.2-3.2 2.2-2.2z" />
+        </svg>
+      )
+    case 'plus':
+      return (
+        <svg {...props}>
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      )
+    case 'pin':
+      return (
+        <svg {...props}>
+          <path d="M12 21s7-4.5 7-11a7 7 0 10-14 0c0 6.5 7 11 7 11z" />
+          <circle cx="12" cy="10" r="2.5" fill="#fff" stroke="none" />
+        </svg>
+      )
+    case 'chart':
+      return (
+        <svg {...props}>
+          <path d="M4 19V5M10 19V9M16 19v-6M22 19V3" />
+        </svg>
+      )
+    default:
+      return null
+  }
+}
+
+function LiveDashboardMock() {
   return (
-    <div className="tl-phone">
-      <div className="tl-phone__notch" aria-hidden />
-      <div className="tl-phone__screen">{children}</div>
+    <div className="live-dash" aria-label="App dashboard preview">
+      <header className="live-dash__header">
+        <div className="live-dash__header-left">
+          <span className="live-dash__brand">TRUCKER LIFE AI</span>
+          <h2 className="live-dash__company">Steven Trucking Inc</h2>
+        </div>
+        <div className="live-dash__header-actions">
+          <span className="live-dash__ai-pill">AI</span>
+          <svg className="live-dash__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg>
+          <span className="live-dash__bell">
+            <svg className="live-dash__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+            </svg>
+            <span className="live-dash__badge">2</span>
+          </span>
+          <svg className="live-dash__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+        </div>
+      </header>
+
+      <div className="live-dash__stats">
+        <div className="live-dash__stat-row">
+          <div className="live-dash__stat">
+            <span className="live-dash__stat-label">Total revenue</span>
+            <strong className="live-dash__stat-value live-dash__stat-value--green">$17,500</strong>
+            <span className="live-dash__stat-sub">This month · revenue</span>
+          </div>
+          <div className="live-dash__stat">
+            <span className="live-dash__stat-label">Total miles</span>
+            <strong className="live-dash__stat-value">7,402</strong>
+            <span className="live-dash__stat-sub">This month · loaded + deadhead</span>
+          </div>
+        </div>
+        <div className="live-dash__stat-row">
+          <div className="live-dash__stat">
+            <span className="live-dash__stat-label">Total fuel</span>
+            <strong className="live-dash__stat-value">$6,180</strong>
+            <span className="live-dash__stat-sub">This month · fuel cost</span>
+          </div>
+          <div className="live-dash__stat">
+            <span className="live-dash__stat-label">RPM</span>
+            <strong className="live-dash__stat-value">$2.36</strong>
+            <span className="live-dash__stat-sub">This month · Rev. Per Mile</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="live-dash__tiles">
+        {DASH_TILES.map((tile) => (
+          <div key={tile.label} className="live-dash__tile" style={{ backgroundColor: tile.bg }}>
+            <TileIcon name={tile.icon} />
+            <span className="live-dash__tile-label">{tile.label}</span>
+            <span className="live-dash__tile-sub">{tile.sub}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const SCREENS = {
+  voiceLog: { src: '/screens/voice-log.png', alt: 'Voice Log screen — speak to log a load hands-free' },
+  loads: { src: '/screens/loads.png', alt: 'Loads screen with true rate per mile on every load' },
+  reports: { src: '/screens/reports.png', alt: 'Monthly reports overview with revenue, expenses, and miles' },
+  monthlyReport: { src: '/screens/monthly-report.png', alt: 'Monthly performance report PDF preview' },
+  aiAdvisor: { src: '/screens/ai-advisor.png', alt: 'AI Advisor answering profitability questions' },
+}
+
+function AppScreenshot({ src, alt }) {
+  return (
+    <div className="app-shot">
+      <img src={src} alt={alt} loading="lazy" decoding="async" />
+    </div>
+  )
+}
+
+function PhoneMock({ children, label, variant = 'default' }) {
+  const isApp = variant === 'app'
+  const isScreenshot = variant === 'screenshot'
+  return (
+    <div className={`phone ${isApp ? 'phone--app' : ''} ${isScreenshot ? 'phone--screenshot' : ''}`}>
+      {label && <span className="phone__label">{label}</span>}
+      <div className="phone__frame">
+        <div className="phone__island" aria-hidden />
+        <div className="phone__screen">
+          {!isApp && !isScreenshot && (
+            <div className="phone__status">
+              <span>9:41</span>
+              <span className="phone__status-icons" aria-hidden>
+                <i /><i /><i />
+              </span>
+            </div>
+          )}
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Eyebrow({ children }) {
+  return <p className="eyebrow">{children}</p>
+}
+
+function CheckItem({ children }) {
+  return (
+    <li className="check-item">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
+        <circle cx="9" cy="9" r="9" fill="currentColor" fillOpacity="0.12" />
+        <path
+          d="M5.5 9.2l2.1 2.1 4.9-5"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      {children}
+    </li>
+  )
+}
+
+const PROBLEMS = [
+  {
+    icon: '📉',
+    title: 'Broker math vs your math',
+    body: "Broker quoted $1.51/mile. Sounds decent. But after 210 deadhead miles, your true rate was $1.08. You ran that load for almost nothing — and didn't know until it was too late.",
+  },
+  {
+    icon: '⏱️',
+    title: 'Admin is eating your hours',
+    body: 'IFTA filings. Expense logs. Tax records. Fuel receipts stuffed in the glovebox. The average owner-operator loses 6+ hours a month to paperwork that should take 20 minutes.',
+  },
+  {
+    icon: '🚛',
+    title: 'Every app was built for an office',
+    body: "Trucking software is designed for dispatchers sitting at a desk. You're doing 600 miles today. You shouldn't have to pull over to log a load.",
+  },
+]
+
+const FEATURE_SLIDES = [
+  {
+    id: 'voice-log',
+    eyebrow: 'Voice Logging',
+    title: 'Just talk.',
+    body: '"Picked up in Dallas, delivering to Memphis, $2,800, 450 miles." Done. Logged, categorized, calculated — while you drive.',
+    screen: SCREENS.voiceLog,
+  },
+  {
+    id: 'true-rate',
+    eyebrow: 'True Rate Calculator',
+    title: 'Know what a load actually pays.',
+    body: "Rate per loaded mile AND rate per total mile, deadhead included. Get warned before you accept a load that's not worth running.",
+    screen: SCREENS.loads,
+  },
+  {
+    id: 'reports',
+    eyebrow: 'IFTA & Reports',
+    title: 'File-ready in minutes.',
+    body: 'Miles tracked by state automatically. Quarterly IFTA report ready to file. Monthly performance report shows gross, net, cost per mile, and deadhead percentage. One tap to PDF.',
+    screen: SCREENS.reports,
+  },
+  {
+    id: 'advisor',
+    eyebrow: 'AI Advisor',
+    title: 'Plain answers. No spreadsheet.',
+    body: 'Ask anything. "Am I profitable this month?" "Which broker pays best?" "How much did I spend on fuel in April?"',
+    screen: SCREENS.aiAdvisor,
+  },
+  {
+    id: 'tax-records',
+    eyebrow: 'Tax-Ready Records',
+    title: 'Every expense. Ready to file.',
+    body: 'Fuel, showers, laundry, truck wash, tolls, meals, maintenance — captured, categorized, and ready for your accountant or DIY filing.',
+    screen: SCREENS.monthlyReport,
+  },
+]
+
+function FeatureShowcase() {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const slide = FEATURE_SLIDES[active]
+  const count = FEATURE_SLIDES.length
+
+  const goTo = (index) => {
+    setActive((index + count) % count)
+    setPaused(true)
+  }
+
+  const goNext = () => goTo(active + 1)
+  const goPrev = () => goTo(active - 1)
+
+  useEffect(() => {
+    if (paused) return undefined
+    const timer = setInterval(() => {
+      setActive((i) => (i + 1) % count)
+    }, 5500)
+    return () => clearInterval(timer)
+  }, [paused, count])
+
+  return (
+    <div
+      className="feature-showcase"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}>
+      <div className="feature-showcase__tabs" role="tablist" aria-label="App features">
+        {FEATURE_SLIDES.map((s, i) => (
+          <button
+            key={s.id}
+            type="button"
+            role="tab"
+            aria-selected={i === active}
+            className={`feature-showcase__tab ${i === active ? 'is-active' : ''}`}
+            onClick={() => goTo(i)}>
+            <span className="feature-showcase__tab-num">{String(i + 1).padStart(2, '0')}</span>
+            <span className="feature-showcase__tab-text">{s.eyebrow}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="feature-showcase__main">
+        <div className="feature-showcase__copy">
+          <div className="feature-showcase__detail" key={slide.id}>
+            <Eyebrow>{slide.eyebrow}</Eyebrow>
+            <h3 className="feature-showcase__title">{slide.title}</h3>
+            <p className="feature-showcase__body">{slide.body}</p>
+          </div>
+
+          <div className="feature-showcase__controls">
+            <button type="button" className="feature-showcase__arrow" onClick={goPrev} aria-label="Previous feature">
+              ←
+            </button>
+            <div className="feature-showcase__dots" role="tablist" aria-label="Feature slides">
+              {FEATURE_SLIDES.map((s, i) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === active}
+                  aria-label={s.eyebrow}
+                  className={`feature-showcase__dot ${i === active ? 'is-active' : ''}`}
+                  onClick={() => goTo(i)}
+                />
+              ))}
+            </div>
+            <button type="button" className="feature-showcase__arrow" onClick={goNext} aria-label="Next feature">
+              →
+            </button>
+          </div>
+        </div>
+
+        <div className="feature-showcase__visual">
+          <PhoneMock variant="screenshot">
+            <div className="feature-showcase__carousel" aria-live="polite">
+              {FEATURE_SLIDES.map((s, i) => (
+                <div
+                  key={s.id}
+                  className={`feature-showcase__slide ${i === active ? 'is-active' : ''}`}
+                  aria-hidden={i !== active}>
+                  <AppScreenshot src={s.screen.src} alt={s.screen.alt} />
+                </div>
+              ))}
+            </div>
+          </PhoneMock>
+          <p className="feature-showcase__caption">
+            {active + 1} / {count} · {slide.eyebrow}
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     const els = document.querySelectorAll('[data-reveal]')
@@ -20,7 +356,7 @@ export default function App() {
           if (entry.isIntersecting) entry.target.classList.add('is-visible')
         })
       },
-      { threshold: 0.12, rootMargin: '0px 0px -32px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     )
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
@@ -37,398 +373,329 @@ export default function App() {
 
   return (
     <>
-      <header className="tl-nav">
-        <a href="#" className="tl-nav__brand" onClick={closeMenu}>
-          TRUCKER LIFE AI
-        </a>
-        <nav className={`tl-nav__links ${menuOpen ? 'is-open' : ''}`} aria-label="Primary">
-          <a href="#features" className="tl-nav__link" onClick={closeMenu}>
-            Features
+      <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
+        <div className="container nav__inner">
+          <a href="#top" className="nav__brand" onClick={closeMenu}>
+            <span className="nav__mark" aria-hidden>T</span>
+            Trucker Life AI
           </a>
-          <a href="#pricing" className="tl-nav__link" onClick={closeMenu}>
-            Pricing
-          </a>
-          <a href="#" className="tl-btn-download tl-btn-download--pulse" onClick={closeMenu}>
-            Download
-          </a>
-        </nav>
-        <button
-          type="button"
-          className={`tl-nav__burger ${menuOpen ? 'is-open' : ''}`}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((o) => !o)}>
-          <span />
-          <span />
-          <span />
-        </button>
+          <nav className={`nav__links ${menuOpen ? 'is-open' : ''}`} aria-label="Primary">
+            <a href="#features" onClick={closeMenu}>
+              Features
+            </a>
+            <a href="#pricing" onClick={closeMenu}>
+              Pricing
+            </a>
+            <a href="#about-us" onClick={closeMenu}>
+              About Us
+            </a>
+            <a
+              href={APP_STORE_URL}
+              className="btn btn--sm btn--primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}>
+              Download
+            </a>
+          </nav>
+          <button
+            type="button"
+            className={`nav__burger ${menuOpen ? 'is-open' : ''}`}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((o) => !o)}>
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
 
       <main>
         {/* Hero */}
-        <section className="tl-hero" data-reveal id="top">
-          <div>
-            <h1 className="tl-head tl-hero__title">
-              MILES UP.
-              <br />
-              MONEY DOWN.
-              <br />
-              FIND OUT WHY.
-            </h1>
-            <p className="tl-hero__sub">
-              The AI co-driver that handles your paperwork while you handle the road. Voice logging. Deadhead
-              tracking. IFTA automation. All hands-free.
-            </p>
-            <div className="tl-hero__actions">
-              <a className="tl-btn tl-btn--gold tl-btn-pulse" href="#">
-                Download for iOS
-              </a>
-              <a className="tl-btn tl-btn--outline tl-btn-pulse" href="#">
-                Download for Android
-              </a>
+        <section className="hero" data-reveal id="top">
+          <div className="hero__bg" aria-hidden />
+          <div className="container hero__inner">
+            <div className="hero__copy">
+              <Eyebrow>Your AI co-pilot. Built for the road.</Eyebrow>
+              <h1 className="hero__title">
+                Miles up.
+                <br />
+                <span className="hero__title-accent">Money down.</span>
+                <br />
+                Find out why.
+              </h1>
+              <p className="hero__sub">
+                You&apos;re running a business from a cab. Brokers lowball you. Deadhead eats your margin. Tax
+                season hits like a wall. Trucker Life AI is the co-driver that handles the numbers — while you
+                handle the road.
+              </p>
+              <div className="hero__actions">
+                <a
+                  className="btn btn--primary btn--lg"
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.63 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                  </svg>
+                  Download for iOS
+                </a>
+              </div>
+              <ul className="hero__trust">
+                <li>14-day free trial</li>
+                <li>No credit card</li>
+                <li>Built by a trucker</li>
+              </ul>
             </div>
-            <p className="tl-micro">
-              ✓ Free 14-day trial &nbsp; ✓ No credit card required &nbsp; ✓ Built by a trucker
-            </p>
-          </div>
-          <div className="tl-hero__phone-glow">
-            <PhoneMock>
-              <div className="tl-dash-stat">
-                <span>Gross Revenue</span>
-                <span>$12,400</span>
-              </div>
-              <div className="tl-dash-stat">
-                <span>Fuel Cost</span>
-                <span>-$3,200</span>
-              </div>
-              <div className="tl-dash-stat tl-dash-stat--profit">
-                <span>Net Profit</span>
-                <span>$7,847</span>
-              </div>
-              <div className="tl-dash-stat">
-                <span>True Rate/Mile</span>
-                <span>$1.86</span>
-              </div>
-              <div className="tl-dash-stat">
-                <span>Deadhead</span>
-                <span>11%</span>
-              </div>
-            </PhoneMock>
+
+            <div className="hero__visual">
+              <PhoneMock label="Live dashboard" variant="app">
+                <LiveDashboardMock />
+              </PhoneMock>
+            </div>
           </div>
         </section>
 
         {/* Problem */}
-        <section className="tl-section tl-problem" data-reveal id="problem">
-          <div className="tl-section__inner">
-            <h2 className="tl-head tl-section-title">RUNNING BLIND IS COSTING YOU THOUSANDS</h2>
-            <div className="tl-cards3">
-              <article className="tl-card-problem">
-                <h3>Broker Math vs Real Math</h3>
-                <p>
-                  Broker said $1.51/mile. After 210 deadhead miles your true rate was $1.08. You almost lost $400
-                  without knowing.
-                </p>
-              </article>
-              <article className="tl-card-problem">
-                <h3>Hours on Paperwork</h3>
-                <p>
-                  IFTA. Expense logs. Tax records. The average owner-op spends 6+ hours per month on admin that
-                  should take 20 minutes.
-                </p>
-              </article>
-              <article className="tl-card-problem">
-                <h3>Built for Offices Not Trucks</h3>
-                <p>
-                  Every trucking app expects you to type while parked. You are not in an office. You are driving 600
-                  miles today.
-                </p>
-              </article>
+        <section className="section section--alt" data-reveal id="problem">
+          <div className="container">
+            <div className="section__header">
+              <Eyebrow>Why most owner-operators bleed money</Eyebrow>
+              <h2 className="section__title">You&apos;re working hard. The numbers don&apos;t add up. Here&apos;s why.</h2>
+            </div>
+            <div className="problem-grid">
+              {PROBLEMS.map((item) => (
+                <article key={item.title} className="problem-card">
+                  <span className="problem-card__icon" aria-hidden>
+                    {item.icon}
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Features */}
-        <section className="tl-section tl-features" id="features" data-reveal>
-          <div className="tl-section__inner">
-            <div className="tl-feature-row">
-              <div>
-                <h2 className="tl-head tl-feature__head">TALK. IT LOGS.</h2>
-                <p className="tl-feature__body">
-                  Just left a pickup? Say it out loud. Loaded in Chicago heading to Dallas 847 miles Echo Global load
-                  23145 $1800. Done. Load logged. Miles calculated. IFTA updated. No typing. No stopping. No app
-                  switching.
-                </p>
-              </div>
-              <PhoneMock>
-                <div className="tl-wave" aria-hidden>
-                  {[...Array(7)].map((_, i) => (
-                    <span key={i} className="tl-wave__bar" />
-                  ))}
-                </div>
-                <div style={{ padding: '0 16px 16px' }}>
-                  <div className="tl-load-card">
-                    <strong>Echo Global · Load #23145</strong>
-                    Chicago → Dallas · 847 mi · $1,800
-                  </div>
-                </div>
-              </PhoneMock>
+        <section className="section" id="features" data-reveal>
+          <div className="container">
+            <div className="section__header section__header--center">
+              <Eyebrow>Built for the cab, not the cubicle</Eyebrow>
+              <h2 className="section__title">
+                Everything you need to know your real numbers — without typing a word.
+              </h2>
             </div>
 
-            <div className="tl-feature-row tl-feature-row--reverse">
-              <div>
-                <h2 className="tl-head tl-feature__head">THE TRUTH ABOUT YOUR LOADS</h2>
-                <p className="tl-feature__body">
-                  Brokers quote loaded miles. Your profit depends on total miles. Trucker Life AI shows your TRUE rate
-                  after deadhead before you accept a load that looks good on paper but kills your margin on the road.
-                </p>
-              </div>
-              <PhoneMock>
-                <div className="tl-compare">
-                  <div className="tl-compare__row tl-compare__row--green">
-                    <span>Broker Rate</span>
-                    <span>$1.51/mile</span>
-                  </div>
-                  <div className="tl-compare__row tl-compare__row--red">
-                    <span>TRUE Rate</span>
-                    <span>$1.08/mile</span>
-                  </div>
-                  <p className="tl-compare__warn">⚠ Margin crushed after deadhead</p>
-                </div>
-              </PhoneMock>
-            </div>
-
-            <div className="tl-feature-row">
-              <div>
-                <h2 className="tl-head tl-feature__head">IFTA IN MINUTES NOT HOURS</h2>
-                <p className="tl-feature__body">
-                  State crossings tracked automatically. Miles per state calculated. Quarterly report generated with one
-                  tap. What used to take 4 hours now takes 8 minutes.
-                </p>
-              </div>
-              <PhoneMock>
-                <div className="tl-ifta-rows">
-                  <div className="tl-ifta-row">
-                    <span>Illinois</span>
-                    <span>412 mi</span>
-                  </div>
-                  <div className="tl-ifta-row">
-                    <span>Missouri</span>
-                    <span>211 mi</span>
-                  </div>
-                  <div className="tl-ifta-row">
-                    <span>Oklahoma</span>
-                    <span>189 mi</span>
-                  </div>
-                  <div className="tl-ifta-row">
-                    <span>Texas</span>
-                    <span>298 mi</span>
-                  </div>
-                  <div className="tl-ifta-row">
-                    <span style={{ color: 'var(--gold)' }}>Q4 ready</span>
-                    <span>Export PDF →</span>
-                  </div>
-                </div>
-              </PhoneMock>
-            </div>
-
-            <div className="tl-feature-row tl-feature-row--reverse">
-              <div>
-                <h2 className="tl-head tl-feature__head">AN ACCOUNTANT IN YOUR POCKET</h2>
-                <p className="tl-feature__body">
-                  Ask anything. How did I do this month? What is my best lane? Am I making money on CH Robinson loads?
-                  Your AI advisor knows your numbers and tells you straight.
-                </p>
-              </div>
-              <PhoneMock>
-                <div className="tl-chat">
-                  <div className="tl-chat__bubble tl-chat__bubble--user">
-                    How did I do this month vs last?
-                  </div>
-                  <div className="tl-chat__bubble tl-chat__bubble--ai">
-                    You&apos;re up 14% on net. Best lane: Dallas→Atlanta. CH Robinson loads averaged $1.42/mi true rate
-                    after deadhead.
-                  </div>
-                </div>
-              </PhoneMock>
-            </div>
+            <FeatureShowcase />
           </div>
         </section>
 
-        {/* Viral deadhead */}
-        <section className="tl-section tl-viral" data-reveal id="deadhead-story">
-          <div className="tl-section__inner">
-            <h2 className="tl-head tl-section-title">THE LOAD THAT ALMOST COST ME $400</h2>
-            <p className="tl-viral__sub">Broker said $1.51/mile. Trucker Life AI showed the truth.</p>
-            <div className="tl-app-card">
-              <div className="tl-app-card__row">
-                <span>Broker Rate</span>
-                <span>$1,800</span>
+        {/* Deadhead story */}
+        <section className="section section--warm" data-reveal id="deadhead-story">
+          <div className="container">
+            <div className="story-block">
+              <div className="story-block__copy">
+                <Eyebrow>No more guessing</Eyebrow>
+                <h2 className="section__title section__title--left">
+                  You&apos;ll know your margin before you leave the truck stop.
+                </h2>
+                <p className="story-block__body">
+                  Gross revenue means nothing without net profit. Loaded miles mean nothing without deadhead. For
+                  the first time, you&apos;ll see the full picture — every load, every month, every mile.
+                </p>
+                <ul className="story-block__stats">
+                  <li>
+                    <strong>15.8%</strong>
+                    <span>net margin tracked</span>
+                  </li>
+                  <li>
+                    <strong>89%</strong>
+                    <span>loaded miles</span>
+                  </li>
+                  <li>
+                    <strong>11%</strong>
+                    <span>deadhead caught</span>
+                  </li>
+                </ul>
+                <blockquote className="quote quote--left">
+                  &ldquo;I finally know what I&apos;m actually making — mile by mile.&rdquo;
+                </blockquote>
               </div>
-              <div className="tl-app-card__row">
-                <span>Loaded Miles</span>
-                <span>800 mi</span>
-              </div>
-              <div className="tl-app-card__row">
-                <span>Loaded Rate</span>
-                <span>$2.25/mile</span>
-              </div>
-              <div className="tl-app-card__divider">REAL PICTURE</div>
-              <div className="tl-app-card__row">
-                <span>Deadhead Miles</span>
-                <span>210 mi</span>
-              </div>
-              <div className="tl-app-card__row">
-                <span>Total Miles</span>
-                <span>1,010 mi</span>
-              </div>
-              <div className="tl-app-card__row">
-                <span>TRUE Rate</span>
-                <span className="tl-app-card__value--gold">$1.78/mile</span>
-              </div>
-              <div className="tl-app-card__row">
-                <span>Estimated Fuel</span>
-                <span>-$420</span>
-              </div>
-              <div className="tl-app-card__row">
-                <span>Net Profit</span>
-                <span>$847</span>
-              </div>
-              <div className="tl-app-card__banner">
-                <span className="tl-app-card__banner-row">
-                  <span>Deadhead</span>
-                  <span className="tl-app-card__dh-group">
-                    <span className="tl-app-card__dh-pct">26%</span>
-                    <span className="tl-app-card__dh-alert" title="Above threshold">
-                      !
-                    </span>
-                  </span>
-                  <span className="tl-app-card__banner-msg">
-                    — above 20% threshold. Consider negotiating rate.
-                  </span>
-                </span>
-              </div>
+              <PhoneMock variant="screenshot">
+                <AppScreenshot src={SCREENS.monthlyReport.src} alt={SCREENS.monthlyReport.alt} />
+              </PhoneMock>
             </div>
-            <p className="tl-viral__quote">I almost took this load. The app caught it before I did.</p>
           </div>
         </section>
 
         {/* Stats */}
-        <section className="tl-stats" data-reveal aria-label="Industry stats">
-          <div className="tl-stats__inner">
-            <div className="tl-stats__item">
-              <div className="tl-stats__num">587,000</div>
-              <div className="tl-stats__label">Owner-Operators in the US</div>
+        <section className="stats-bar" data-reveal aria-label="Industry stats">
+          <div className="container stats-bar__inner">
+            <div className="stats-bar__item">
+              <strong>587,000</strong>
+              <span>Owner-operators in the US</span>
             </div>
-            <div className="tl-stats__divider" aria-hidden />
-            <div className="tl-stats__item">
-              <div className="tl-stats__num">$940B</div>
-              <div className="tl-stats__label">Trucking Industry</div>
+            <div className="stats-bar__item">
+              <strong>$940B</strong>
+              <span>Trucking industry</span>
             </div>
-            <div className="tl-stats__divider" aria-hidden />
-            <div className="tl-stats__item">
-              <p className="tl-stats__single">Built by a Trucker with 10 Years Experience</p>
+            <div className="stats-bar__item stats-bar__item--wide">
+              <strong>10 years</strong>
+              <span>Owner-operator experience behind this app</span>
             </div>
           </div>
         </section>
 
         {/* Pricing */}
-        <section className="tl-section tl-pricing" id="pricing" data-reveal>
-          <div className="tl-section__inner">
-            <h2 className="tl-head tl-section-title">PAY FOR ITSELF WITH ONE CAUGHT BAD LOAD</h2>
-            <div className="tl-pricing__grid">
-              <article className="tl-price-card">
-                <div className="tl-price-card__tier">FREE</div>
-                <p className="tl-price-card__amt">$0 · 14-day trial</p>
+        <section className="section" id="pricing" data-reveal>
+          <div className="container">
+            <div className="section__header section__header--center">
+              <Eyebrow>Pricing</Eyebrow>
+              <h2 className="section__title">Pays for itself with one caught bad load</h2>
+            </div>
+
+            <div className="pricing-grid">
+              <article className="price-card">
+                <div className="price-card__header">
+                  <h3>Free</h3>
+                  <p className="price-card__price">
+                    <span>$0</span>
+                    <small>14-day trial</small>
+                  </p>
+                </div>
                 <ul>
-                  <li>Voice logging</li>
-                  <li>Load tracking</li>
-                  <li>Fuel entries</li>
-                  <li>Basic reports</li>
-                  <li>IFTA tracking</li>
+                  <CheckItem>Voice logging</CheckItem>
+                  <CheckItem>Load tracking</CheckItem>
+                  <CheckItem>Fuel entries</CheckItem>
+                  <CheckItem>Basic reports</CheckItem>
+                  <CheckItem>IFTA tracking</CheckItem>
                 </ul>
-                <a className="tl-btn tl-btn--outline" href="#">
-                  Start Free Trial
+                <a
+                  className="btn btn--outline btn--block"
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Start free trial
                 </a>
               </article>
-              <article className="tl-price-card tl-price-card--featured">
-                <span className="tl-price-card__badge">MOST POPULAR</span>
-                <div className="tl-price-card__tier">PRO</div>
-                <p className="tl-price-card__amt">$29/mo</p>
+
+              <article className="price-card price-card--featured">
+                <span className="price-card__badge">Most popular</span>
+                <div className="price-card__header">
+                  <h3>Pro</h3>
+                  <p className="price-card__price">
+                    <span>$29</span>
+                    <small>/month</small>
+                  </p>
+                </div>
                 <ul>
-                  <li>Everything in Free</li>
-                  <li>Unlimited loads</li>
-                  <li>AI Advisor</li>
-                  <li>Full IFTA reports</li>
-                  <li>Tax Center</li>
-                  <li>PDF exports</li>
-                  <li>Priority support</li>
+                  <CheckItem>Everything in Free</CheckItem>
+                  <CheckItem>Unlimited loads</CheckItem>
+                  <CheckItem>AI Advisor</CheckItem>
+                  <CheckItem>Full IFTA reports</CheckItem>
+                  <CheckItem>Tax Center</CheckItem>
+                  <CheckItem>PDF exports</CheckItem>
+                  <CheckItem>Priority support</CheckItem>
                 </ul>
-                <a className="tl-btn tl-btn--gold tl-btn-pulse" href="#">
+                <a
+                  className="btn btn--primary btn--block"
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer">
                   Get Pro
                 </a>
               </article>
             </div>
-            <p className="tl-pricing__footnote">
+
+            <p className="pricing-note">
               Cancel anytime. No contracts. No hidden fees. One bad load avoided pays for 12 months of Pro.
             </p>
           </div>
         </section>
 
         {/* Built by */}
-        <section className="tl-section tl-built" data-reveal id="built-by">
-          <div className="tl-section__inner">
-            <h2 className="tl-head tl-section-title">BUILT BY SOMEONE WHO HAS BEEN THERE</h2>
-            <p className="tl-built__body">
-              I spent a decade as an owner-operator. Built a trucking business from scratch. Drove the lanes. Dealt
-              with the brokers. Did IFTA at midnight. Every trucking app I tried was built by someone who had never sat
-              in a cab. They built software for dispatchers and accountants. Not for drivers. So I built the app I
-              wished existed. One that works while you are driving. One that knows deadhead math. One that has your back
-              at 3am on I-80. This is Trucker Life AI.
-            </p>
-            <div className="tl-checks">
-              <span>10 years owner-operator experience</span>
-              <span>Understands real trucking economics</span>
-              <span>Built for the road not the office</span>
+        <section className="section section--alt" data-reveal id="about-us">
+          <div className="container">
+            <div className="section__header section__header--center">
+              <Eyebrow>Why I built this</Eyebrow>
+              <h2 className="section__title">I was the guy this app is for.</h2>
+            </div>
+            <div className="founder-card" data-reveal>
+              <div className="founder-card__avatar" aria-hidden>
+                J
+              </div>
+              <div className="founder-card__content">
+                <div className="founder-card__body">
+                  <p>
+                    Ten years behind the wheel as an owner-operator. Built a trucking business from scratch. Ran the
+                    lanes. Fought the brokers. Did IFTA at midnight in a truck stop parking lot.
+                  </p>
+                  <p>
+                    Every app I tried was built by someone who&apos;d never sat in a cab. Software designed for
+                    dispatchers. Accounting tools that assumed you had a desk. Nothing that understood deadhead math,
+                    or knew what it costs to run empty 200 miles.
+                  </p>
+                  <p>
+                    So I built the app I needed. One that works while you&apos;re driving. One that knows what a load
+                    actually costs you. One that has your back at 3am on I-80.
+                  </p>
+                </div>
+                <ul className="founder-card__checks">
+                  <CheckItem>10 years owner-operator experience</CheckItem>
+                  <CheckItem>Understands real trucking economics</CheckItem>
+                  <CheckItem>Built for the road, not the office</CheckItem>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Final CTA */}
-        <section className="tl-final-cta" data-reveal id="download">
-          <div className="tl-section__inner">
-            <h2 className="tl-head">KNOW YOUR NUMBERS. OWN YOUR BUSINESS.</h2>
-            <p className="tl-final-cta__sub">
-              Join thousands of owner-operators who finally know exactly what they are making mile by mile.
+        <section className="cta" data-reveal id="download">
+          <div className="cta__bg" aria-hidden />
+          <div className="container cta__inner">
+            <h2 className="cta__title">Know your numbers. Own your business.</h2>
+            <p className="cta__sub">
+              Join owner-operators who finally know exactly what they&apos;re making — mile by mile.
             </p>
-            <div className="tl-final-cta__btns">
-              <a className="tl-btn tl-btn--gold tl-btn-pulse" href="#">
+            <div className="cta__actions">
+              <a
+                className="btn btn--primary btn--lg btn--inverse"
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer">
                 Download for iOS — App Store
               </a>
-              <a className="tl-btn tl-btn--outline tl-btn-pulse" href="#">
-                Download for Android — Google Play
-              </a>
             </div>
-            <p className="tl-micro">Free 14-day trial. No credit card required.</p>
+            <p className="cta__fine">Free 14-day trial · No credit card required</p>
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="tl-footer" id="support">
-          <div className="tl-footer__inner">
-            <div className="tl-footer__brand">TRUCKER LIFE AI</div>
-            <nav className="tl-footer__links" aria-label="Footer">
-              <a href="#features">Features</a>
-              <a href="#pricing">Pricing</a>
-              <a href="https://trucker-life-legal.vercel.app" target="_blank" rel="noopener noreferrer">
-                Privacy Policy
+        <footer className="footer" id="support">
+          <div className="container footer__inner">
+            <div className="footer__top">
+              <a href="#top" className="footer__brand">
+                <span className="nav__mark" aria-hidden>T</span>
+                Trucker Life AI
               </a>
-              <a href="https://trucker-life-legal.vercel.app" target="_blank" rel="noopener noreferrer">
-                Terms of Service
-              </a>
-              <a href="#">Support</a>
-            </nav>
-            <p className="tl-footer__copy">
-              © 2025 Trucker Life AI. Built for owner-operators, by an owner-operator.
+              <nav className="footer__links" aria-label="Footer">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#about-us">About Us</a>
+                <a href="https://trucker-life-legal.vercel.app" target="_blank" rel="noopener noreferrer">
+                  Privacy
+                </a>
+                <a href="https://trucker-life-legal.vercel.app" target="_blank" rel="noopener noreferrer">
+                  Terms
+                </a>
+                <a href="#">Support</a>
+              </nav>
+            </div>
+            <p className="footer__copy">
+              © {new Date().getFullYear()} Trucker Life AI. Built for owner-operators, by an owner-operator.
             </p>
           </div>
         </footer>
