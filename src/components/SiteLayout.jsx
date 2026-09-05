@@ -60,6 +60,13 @@ export function SiteLayout({ children }) {
             Trucker Life AI
           </Link>
           <nav className={`nav__links ${menuOpen ? 'is-open' : ''}`} aria-label="Primary">
+            <NavLink
+              to="/"
+              end
+              onClick={closeMenu}
+              className={({ isActive }) => (isActive ? 'is-current' : undefined)}>
+              Home
+            </NavLink>
             <a href={homeHash(path, '#features')} onClick={closeMenu}>
               Features
             </a>
