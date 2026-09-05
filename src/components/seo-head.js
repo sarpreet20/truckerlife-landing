@@ -1,11 +1,7 @@
 import { createContext } from 'react'
 
-import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from '../config'
+import { DEFAULT_DESCRIPTION, OG_IMAGE_URL, SITE_NAME, SITE_URL } from '../config'
 
-// During prerendering (SSG) the entry-server provides a `recordHead` function
-// via this context; the Seo component hands it the page's head data so the
-// build script can inject it into the static HTML. On the client the context
-// is null and Seo upserts the tags from a useEffect instead.
 export const HeadContext = createContext(null)
 
 export function computeHead({
@@ -15,9 +11,25 @@ export function computeHead({
   type = 'website',
   jsonLd,
   faqLd,
+  breadcrumbLd,
   noindex = false,
+  publishedTime,
+  modifiedTime,
+  ogImage = OG_IMAGE_URL,
 }) {
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
   const canonical = `${SITE_URL}${path}`
-  return { fullTitle, canonical, description, type, jsonLd, faqLd, noindex }
+  return {
+    fullTitle,
+    canonical,
+    description,
+    type,
+    jsonLd,
+    faqLd,
+    breadcrumbLd,
+    noindex,
+    publishedTime,
+    modifiedTime,
+    ogImage,
+  }
 }

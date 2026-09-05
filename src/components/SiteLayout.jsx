@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
-import { APP_STORE_URL, LEGAL_URL } from '../config'
+import { APP_STORE_URL, PRIVACY_URL, TERMS_URL } from '../config'
 
 function homeHash(pathname, hash) {
   return pathname === '/' ? hash : `/${hash}`
@@ -104,10 +104,10 @@ export function SiteLayout({ children }) {
               <a href={homeHash(path, '#pricing')}>Pricing</a>
               <Link to="/blog">Blog</Link>
               <a href={homeHash(path, '#about-us')}>About Us</a>
-              <a href={LEGAL_URL} target="_blank" rel="noopener noreferrer">
+              <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer">
                 Privacy
               </a>
-              <a href={LEGAL_URL} target="_blank" rel="noopener noreferrer">
+              <a href={TERMS_URL} target="_blank" rel="noopener noreferrer">
                 Terms
               </a>
             </nav>

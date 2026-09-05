@@ -3,7 +3,8 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { FaqList, MarkdownBody } from '../blog/markdown'
 import { getPost, relatedPosts } from '../blog/posts'
 import { Seo } from '../components/Seo'
-import { APP_STORE_URL, SITE_NAME, SITE_URL } from '../config'
+import { APP_STORE_URL, FOUNDER_NAME, LOGO_URL, OG_IMAGE_URL, SITE_NAME, SITE_URL } from '../config'
+import { breadcrumbLd as makeBreadcrumb } from '../lib/schema'
 
 export function BlogPostPage() {
   const { slug } = useParams()
@@ -12,16 +13,32 @@ export function BlogPostPage() {
 
   const url = `/blog/${post.slug}`
   const related = relatedPosts(post)
+  const modified = post.updated || post.date
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.metaDescription,
+    image: [OG_IMAGE_URL],
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: modified,
     keywords: post.keyword,
-    author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-    publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    author: {
+      '@type': 'Person',
+      name: FOUNDER_NAME,
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: LOGO_URL,
+        width: 180,
+        height: 180,
+      },
+    },
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}${url}` },
     timeRequired: `PT${post.readMinutes}M`,
     articleSection: post.category,
@@ -42,6 +59,11 @@ export function BlogPostPage() {
         })),
       }
     : undefined
+  const crumbs = makeBreadcrumb([
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog' },
+    { name: post.title, url },
+  ])
 
   return (
     <main>
@@ -52,22 +74,27 @@ export function BlogPostPage() {
         type="article"
         jsonLd={jsonLd}
         faqLd={faqLd}
+        breadcrumbLd={crumbs}
+        publishedTime={post.date}
+        modifiedTime={modified}
       />
       <article className="blog-post">
         <header className="blog-post__hero">
           <div className="container blog-post__hero-inner">
-            <p className="blog-post__crumbs">
+            <nav className="blog-post__crumbs" aria-label="Breadcrumb">
               <Link to="/">Home</Link>
               <span aria-hidden> / </span>
               <Link to="/blog">Blog</Link>
               <span aria-hidden> / </span>
               <span>{post.category}</span>
-            </p>
+            </nav>
             <p className="eyebrow">{post.keyword}</p>
             <h1>{post.title}</h1>
             <p className="blog-post__deck">{post.excerpt}</p>
             <p className="blog-post__meta">
-              <time dateTime={post.date}>Updated {post.date}</time>
+              <span>By {FOUNDER_NAME}</span>
+              <span aria-hidden>·</span>
+              <time dateTime={modified}>Updated {modified}</time>
               <span aria-hidden>·</span>
               <span>{post.readMinutes} minute read</span>
               <span aria-hidden>·</span>

@@ -1,19 +1,28 @@
-import { renderToString } from 'react-dom/server'
+import { prerender } from 'react-dom/static'
 import { StaticRouter } from 'react-router-dom'
 
 import App from './App'
 import { HeadContext } from './components/seo-head'
 
-// Renders a route to static HTML and collects the page's <head> data
-// (title, meta, canonical, JSON-LD) via the Seo HeadContext.
-export function render(url) {
+// Awaits Suspense/lazy so route-level code splitting still prerenders full HTML.
+export async function render(url) {
   const collected = { head: null }
-  const html = renderToString(
+  const { prelude } = await prerender(
     <HeadContext.Provider value={(head) => (collected.head = head)}>
       <StaticRouter location={url}>
         <App />
       </StaticRouter>
     </HeadContext.Provider>,
   )
+
+  const reader = prelude.getReader()
+  const decoder = new TextDecoder()
+  let html = ''
+  while (true) {
+    const { done, value } = await reader.read()
+    if (done) break
+    html += decoder.decode(value, { stream: true })
+  }
+  html += decoder.decode()
   return { html, head: collected.head }
 }

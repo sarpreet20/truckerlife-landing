@@ -3,15 +3,16 @@ import { Link, useLocation } from 'react-router-dom'
 
 import { posts } from '../blog/posts'
 import { Seo } from '../components/Seo'
-import { APP_STORE_URL, SITE_NAME, SITE_URL } from '../config'
+import { APP_STORE_URL } from '../config'
+import { homeJsonLd } from '../lib/schema'
 
 const DASH_TILES = [
-  { label: 'Loads', sub: '3 this month', bg: '#2563eb', icon: 'briefcase' },
-  { label: 'Fuel', sub: '$6,180 this month', bg: '#f59e0b', icon: 'flame' },
-  { label: 'Maintenance', sub: '1 this month', bg: '#10b981', icon: 'wrench' },
-  { label: 'Accessorial', sub: '$132 this month', bg: '#8b5cf6', icon: 'plus' },
-  { label: 'Travel Expense', sub: '$74 this month', bg: '#ef4444', icon: 'pin' },
-  { label: 'Reports', sub: 'May 2026', bg: '#06b6d4', icon: 'chart' },
+  { label: 'Loads', sub: '3 this month', bg: '#1d4ed8', icon: 'briefcase' },
+  { label: 'Fuel', sub: '$6,180 this month', bg: '#b45309', icon: 'flame' },
+  { label: 'Maintenance', sub: '1 this month', bg: '#047857', icon: 'wrench' },
+  { label: 'Accessorial', sub: '$132 this month', bg: '#6d28d9', icon: 'plus' },
+  { label: 'Travel Expense', sub: '$74 this month', bg: '#b91c1c', icon: 'pin' },
+  { label: 'Reports', sub: 'May 2026', bg: '#0e7490', icon: 'chart' },
 ]
 
 function TileIcon({ name }) {
@@ -128,11 +129,11 @@ function LiveDashboardMock() {
 }
 
 const SCREENS = {
-  voiceLog: { src: '/screens/voice-log.png', alt: 'Voice Log screen — speak to log a load hands-free' },
-  loads: { src: '/screens/loads.png', alt: 'Loads screen with true rate per mile on every load' },
-  reports: { src: '/screens/reports.png', alt: 'Monthly reports overview with revenue, expenses, and miles' },
-  monthlyReport: { src: '/screens/monthly-report.png', alt: 'Monthly performance report PDF preview' },
-  aiAdvisor: { src: '/screens/ai-advisor.png', alt: 'AI Advisor answering profitability questions' },
+  voiceLog: { src: '/screens/voice-log.webp', alt: 'Voice Log screen — speak to log a load hands-free' },
+  loads: { src: '/screens/loads.webp', alt: 'Loads screen with true rate per mile on every load' },
+  reports: { src: '/screens/reports.webp', alt: 'Monthly reports overview with revenue, expenses, and miles' },
+  monthlyReport: { src: '/screens/monthly-report.webp', alt: 'Monthly performance report PDF preview' },
+  aiAdvisor: { src: '/screens/ai-advisor.webp', alt: 'AI Advisor answering profitability questions' },
 }
 
 function AppScreenshot({ src, alt }) {
@@ -321,14 +322,9 @@ function FeatureShowcase() {
         <div className="feature-showcase__visual">
           <PhoneMock variant="screenshot">
             <div className="feature-showcase__carousel" aria-live="polite">
-              {FEATURE_SLIDES.map((s, i) => (
-                <div
-                  key={s.id}
-                  className={`feature-showcase__slide ${i === active ? 'is-active' : ''}`}
-                  aria-hidden={i !== active}>
-                  <AppScreenshot src={s.screen.src} alt={s.screen.alt} />
-                </div>
-              ))}
+              <div className="feature-showcase__slide is-active" aria-hidden={false}>
+                <AppScreenshot src={slide.screen.src} alt={slide.screen.alt} />
+              </div>
             </div>
           </PhoneMock>
           <p className="feature-showcase__caption">
@@ -374,28 +370,15 @@ export function HomePage() {
 
   const featured = FEATURED_SLUGS.map((slug) => posts.find((p) => p.slug === slug)).filter(Boolean)
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: SITE_NAME,
-    applicationCategory: 'BusinessApplication',
-    operatingSystem: 'iOS',
-    url: SITE_URL,
-    offers: { '@type': 'Offer', price: '29.00', priceCurrency: 'USD' },
-    audience: { '@type': 'Audience', audienceType: 'Owner-operators' },
-    description:
-      'AI co-driver for owner-operators: loads, fuel, deadhead, IFTA, and true profit per mile from the cab.',
-  }
-
   return (
     <main>
       <Seo
         title="Trucker Life AI — IFTA & Profit Per Mile for Owner-Operators"
         description="The AI co-driver for owner-operators. Track loads, fuel, deadhead, IFTA, and true profit per mile — built for the cab, not the cubicle."
         path="/"
-        jsonLd={jsonLd}
+        jsonLd={homeJsonLd()}
       />
-      <section className="hero" data-reveal id="top">
+      <section className="hero" id="top">
         <div className="hero__bg" aria-hidden />
         <div className="container hero__inner">
           <div className="hero__copy">

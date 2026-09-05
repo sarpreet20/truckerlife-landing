@@ -7,7 +7,8 @@ export const posts = [
       'Learn how owner-operators calculate cost per mile — truck payment, fuel, insurance, deadhead, and the break-even number you need before you book a load.',
     keyword: 'owner operator cost per mile',
     date: '2026-09-04',
-    readMinutes: 5,
+    updated: '2026-09-05',
+    readMinutes: 8,
     category: 'Numbers',
     excerpt:
       'Rate per mile is what the broker quotes. Cost per mile is what your truck actually spends. Owner-operators who skip this number accept loads that look fine and still lose money.',
@@ -122,6 +123,35 @@ Owner-operators who stay profitable treat CPM like oil pressure — glance at it
 
 [Trucking bookkeeping for owner-operators](/blog/trucking-bookkeeping-for-owner-operators) is how this stays easy. If receipts live in the door pocket until December, your CPM is a story, not a tool.
 
+
+## Worked table: one week of offers
+
+Write this on a note in the truck. Five offers, same week:
+
+- Offer A: $2,400 · 980 loaded · 140 deadhead → true rate $2.14
+- Offer B: $1,850 · 720 loaded · 40 deadhead → true rate $2.43
+- Offer C: $3,100 · 1,200 loaded · 280 deadhead → true rate $2.09
+- Offer D: $2,050 · 800 loaded · 90 deadhead → true rate $2.30
+- Offer E: $2,700 · 1,050 loaded · 200 deadhead → true rate $2.16
+
+If your all-in [cost per mile](/blog/owner-operator-cost-per-mile) is $1.72 and you need $0.35 profit per mile, your floor is **$2.07**. A, C, and E clear it — barely on C. B is the winner. D is solid. The board only showed loaded RPM; the table shows the truth.
+
+Keep a running week like this. Patterns by broker and lane show up fast. That is how [profit per mile](/blog/owner-operator-profit-per-mile) stops being a year-end surprise.
+
+## Spreadsheet vs cab reality
+
+A perfect spreadsheet that you update on Sundays is useless if you book loads on Tuesday with gut feel. The number has to be:
+
+1. Honest (deadhead included)
+2. Current (fuel and insurance this month)
+3. Reachable in under a minute (phone note or app)
+
+Owner-operators who win treat CPM like oil pressure — glance before the next pull. See the [owner-operator numbers hub](/blog/owner-operator-numbers) for the full stack.
+
+## Link it to the books
+
+CPM dies when receipts live in the door pocket. Pair this guide with [trucking bookkeeping](/blog/trucking-bookkeeping-for-owner-operators) and the [expenses checklist](/blog/owner-operator-expenses-checklist) so the inputs stay real.
+
 ## The point
 
 Owner-operator cost per mile is not accounting theater. It is the line between a load that pays the mortgage and a load that only looks busy.
@@ -133,11 +163,11 @@ Trucker Life AI is built only for owner-operators. Voice-log the load, keep fuel
   {
     slug: 'owner-operator-profit-per-mile',
     title: 'Owner-Operator Profit Per Mile: The Number That Actually Pays You',
-    metaTitle: 'Owner-Operator Profit Per Mile: Formula and Realistic Targets',
+    metaTitle: 'Owner-Operator Profit Per Mile: Formula & Targets',
     metaDescription:
-      'Owner-operator profit per mile is what’s left after fuel, the truck, and deadhead. Here’s the formula, a realistic target, and how to stop confusing rate with profit.',
+      'Owner-operator profit per mile is what’s left after fuel, the truck, and deadhead. Formula, realistic targets, and how to stop confusing rate with profit.',
     keyword: 'owner operator profit per mile',
-    date: '2026-09-04',
+    date: '2026-09-01',
     readMinutes: 5,
     category: 'Numbers',
     excerpt:
@@ -246,7 +276,8 @@ Trucker Life AI is for owner-operators only. Log the load and the miles, keep co
       'IFTA filing for owner-operators: miles by state, gallons by jurisdiction, quarterly due dates, and a simple weekly habit so IFTA is not a truck-stop panic.',
     keyword: 'IFTA filing for owner operators',
     date: '2026-09-04',
-    readMinutes: 5,
+    updated: '2026-09-05',
+    readMinutes: 8,
     category: 'IFTA & Taxes',
     excerpt:
       'IFTA is not hard math. It is a records problem. Owner-operators who log miles and fuel by state each week file in an afternoon. Everyone else rebuilds the quarter from crumpled receipts.',
@@ -352,6 +383,34 @@ They use related numbers, but they are not the same form. Do not assume the IFTA
 
 Nothing here is tax advice. It is a records system so you and your preparer are not guessing.
 
+
+## Sample quarter worksheet (one truck)
+
+Pretend Q2. You ran:
+
+- TX 4,200 miles · 640 gallons
+- OK 1,100 miles · 170 gallons
+- AR 900 miles · 140 gallons
+- TN 2,400 miles · 380 gallons
+- Rest of system 800 miles · 120 gallons
+
+MPG by state will not match your truck’s lifetime average. That is fine. What matters is **gallons bought in each jurisdiction** and **miles driven in each**, not a blended fantasy MPG.
+
+If TX fuel tax prepaid at the pump exceeds the miles-driven share, you may get a credit. If you bought cheap diesel in one state and burned miles in a high-tax state, you owe. That is the whole game.
+
+Export your [fuel log](/blog/owner-operator-fuel-log) and ELD miles the same weekend every quarter. File on time. Amend only when the delta is real.
+
+## Audit-ready folder (digital is fine)
+
+Keep four years if you can:
+
+- Fuel receipts (gallons + location + date)
+- Mileage by state (ELD / IFTA report)
+- Prior IFTA returns and payments
+- Notes on cash diesel and bulk DEF if it hits the fuel tax story
+
+Pair with [tax deductions](/blog/owner-operator-tax-deductions) for the income-tax side. More in the [IFTA & taxes hub](/blog/ifta-and-taxes).
+
 ## The point
 
 IFTA filing for owner-operators is a weekly log plus a quarterly total. Miles by state. Gallons by state. Receipts that survive the door pocket.
@@ -365,9 +424,9 @@ Trucker Life AI is built for owner-operators — fuel and miles in one place so 
     title: 'Trucking Bookkeeping for Owner-Operators: What to Track Every Week',
     metaTitle: 'Trucking Bookkeeping for Owner-Operators: Weekly System',
     metaDescription:
-      'Trucking bookkeeping for owner-operators: settlements, fuel, expenses, miles, and a weekly rhythm so tax season is export-and-file, not a glovebox archaeology project.',
+      'Trucking bookkeeping for owner-operators: settlements, fuel, expenses, miles, and a weekly rhythm so tax season is export-and-file — not glovebox archaeology.',
     keyword: 'trucking bookkeeping for owner operators',
-    date: '2026-09-04',
+    date: '2026-08-28',
     readMinutes: 5,
     category: 'Bookkeeping',
     excerpt:
@@ -489,11 +548,11 @@ Trucker Life AI is owner-operator only: loads, fuel, expenses, and reports from 
   {
     slug: 'deadhead-miles-owner-operator',
     title: 'Deadhead Miles: How Empty Miles Quietly Destroy Owner-Operator Profit',
-    metaTitle: 'Deadhead Miles for Owner-Operators: Cost, Ratio, and How to Cut Them',
+    metaTitle: 'Deadhead Miles for Owner-Operators: Cost & How to Cut',
     metaDescription:
       'Deadhead miles are empty miles that still cost fuel and CPM. Owner-operators who track deadhead percentage see why a “good rate” can still lose money.',
     keyword: 'deadhead miles owner operator',
-    date: '2026-09-04',
+    date: '2026-08-25',
     readMinutes: 5,
     category: 'Numbers',
     excerpt:
@@ -608,11 +667,11 @@ Trucker Life AI is for owner-operators — true rate with deadhead included, not
   {
     slug: 'owner-operator-tax-deductions',
     title: 'Owner-Operator Tax Deductions: What to Track All Year (Not in March)',
-    metaTitle: 'Owner-Operator Tax Deductions: Fuel, Truck, Per Diem, Records',
+    metaTitle: 'Owner-Operator Tax Deductions: Fuel, Truck, Per Diem',
     metaDescription:
-      'Owner-operator tax deductions work when you track fuel, the truck, insurance, per diem, and receipts all year. Here is what solo owner-operators should log — and what to take to a trucking CPA.',
+      'Owner-operator tax deductions: fuel, truck, insurance, per diem, and receipts all year. What solo operators should log — and what to bring a trucking CPA.',
     keyword: 'owner operator tax deductions',
-    date: '2026-09-04',
+    date: '2026-08-22',
     readMinutes: 5,
     category: 'IFTA & Taxes',
     excerpt:
@@ -734,10 +793,11 @@ Trucker Life AI is for owner-operators: categorized expenses, fuel, and reports 
     title: 'How Owner-Operators Know If a Load Is Profitable Before They Say Yes',
     metaTitle: 'Is This Load Profitable? Owner-Operator True Rate Per Mile',
     metaDescription:
-      'Know if a load is profitable before you book it. Owner-operators should use true rate per mile: revenue divided by loaded plus deadhead, then compare to cost per mile.',
+      'Know if a load is profitable before you book. Use true rate per mile (pay ÷ loaded + deadhead) and compare it to your cost per mile.',
     keyword: 'profitable load owner operator true rate per mile',
     date: '2026-09-04',
-    readMinutes: 5,
+    updated: '2026-09-05',
+    readMinutes: 8,
     category: 'Loads',
     excerpt:
       'A profitable load is not a high loaded RPM. It is true rate above your cost per mile after deadhead, fuel, and the extras the broker forgot to mention.',
@@ -835,6 +895,23 @@ Save counters that worked. That is your personal rate floor showing up in the re
 
 You can still take a weak load **consciously** — home time, relationship, weather. Log it as a choice. Do not relabel it as a win.
 
+
+## Worked example: two loads, one afternoon
+
+**Load 1.** Broker: $2.35 loaded · 640 miles · 120 deadhead to pickup · pay $1,504.
+
+Total miles = 760. True rate = $1.98. If CPM is $1.70, you clear $0.28/mile before you pay yourself a real wage above the formula. Maybe — if detention is clean.
+
+**Load 2.** Broker: $2.15 loaded · 580 miles · 35 deadhead · pay $1,247.
+
+Total miles = 615. True rate = $2.03. Same CPM $1.70 → $0.33/mile. Shorter empty wins even at a “worse” loaded RPM.
+
+That is the entire skill: [deadhead](/blog/deadhead-miles-owner-operator) + [cost per mile](/blog/owner-operator-cost-per-mile) before ego. Full stack: [owner-operator numbers hub](/blog/owner-operator-numbers).
+
+## When to take a weak load on purpose
+
+Home time, weather, a broker who pays detention fast, or a backhaul that unlocks three strong days. Log it as a **choice**, not a win. Review those choices monthly in [profit per mile](/blog/owner-operator-profit-per-mile). If “exceptions” are half your weeks, your floor is fiction.
+
 ## The point
 
 Owner-operators know a load is profitable when **true rate** clears **cost per mile** after empty miles and the junk fees that show up in real life.
@@ -848,9 +925,9 @@ Trucker Life AI is built only for owner-operators: true rate with deadhead, on t
     title: 'Owner-Operator Per Diem: How Meal Deductions Work When You Live in the Truck',
     metaTitle: 'Owner-Operator Per Diem: Meals, Logs, and IRS Basics (2026)',
     metaDescription:
-      'Owner-operator per diem: how meal deductions work on the road, why you need a day-by-day log, and how to avoid treating every calendar day like a full per diem day.',
+      'Owner-operator per diem: meal deductions on the road, why you need a day-by-day log, and how to avoid claiming every calendar day.',
     keyword: 'owner operator per diem',
-    date: '2026-09-04',
+    date: '2026-08-18',
     readMinutes: 5,
     category: 'IFTA & Taxes',
     excerpt:
@@ -957,9 +1034,9 @@ Trucker Life AI is for owner-operators — loads, miles, and expenses in one pla
     title: 'Owner-Operator Fuel Log: Track Gallons for IFTA and Real Cost Per Mile',
     metaTitle: 'Owner-Operator Fuel Log: IFTA Gallons and Cost Per Mile',
     metaDescription:
-      'An owner-operator fuel log should capture gallons, dollars, location, and date — for IFTA by jurisdiction and for a real fuel cost per mile, including cash stops.',
+      'Owner-operator fuel log: gallons, dollars, location, and date — for IFTA by jurisdiction and a real fuel cost per mile, including cash stops.',
     keyword: 'owner operator fuel log',
-    date: '2026-09-04',
+    date: '2026-08-14',
     readMinutes: 5,
     category: 'IFTA & Taxes',
     excerpt:
@@ -979,7 +1056,7 @@ Trucker Life AI is for owner-operators — loads, miles, and expenses in one pla
         a: 'Fuel cost per mile = fuel dollars ÷ miles in the same period. Without gallons and miles together, you cannot see whether a lane or a month got more expensive.',
       },
     ],
-    body: `Diesel is the largest variable bill most owner-operators pay. An **owner-operator fuel log** is how that bill becomes a number you can use — for [IFTA](/blog/ifta-filing-for-owner-operators) and for [cost per mile](/blog/owner-operator-cost-per-mile).
+    body: `Diesel is the largest variable bill most owner-operators pay. An **owner-operator fuel log** is how that bill becomes a number you can use — for [IFTA](/blog/ifta-filing-for-owner-operators), [cost per mile](/blog/owner-operator-cost-per-mile), and the rest of the [expenses checklist](/blog/owner-operator-expenses-checklist).
 
 A fuel-card PDF in your email is not a log. It is a hint. Cash stops, a fill in a different name, a missing gallon total — those holes show up on a quarterly return and in a fake MPG.
 
@@ -1075,9 +1152,9 @@ Trucker Life AI is owner-operator only. Log fuel when it happens and keep it nex
     title: 'Owner-Operator Expenses Checklist: What to Log Every Week',
     metaTitle: 'Owner-Operator Expenses Checklist: Fuel, Truck, Road, Office',
     metaDescription:
-      'Owner-operator expenses checklist: fuel, maintenance, insurance, tolls, parking, per diem, and the small cab costs that disappear if you only log the big invoices.',
+      'Owner-operator expenses checklist: fuel, maintenance, insurance, tolls, parking, per diem, and cab costs that vanish if you only log big invoices.',
     keyword: 'owner operator expenses',
-    date: '2026-09-04',
+    date: '2026-08-10',
     readMinutes: 5,
     category: 'Bookkeeping',
     excerpt:

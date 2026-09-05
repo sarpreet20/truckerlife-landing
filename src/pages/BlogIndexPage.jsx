@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { hubs } from '../blog/hubs'
 import { posts } from '../blog/posts'
 import { Seo } from '../components/Seo'
 import { SITE_NAME, SITE_URL } from '../config'
@@ -26,7 +27,7 @@ export function BlogIndexPage() {
     <main>
       <Seo
         title="Owner-Operator Blog: Cost Per Mile, IFTA, and Profit"
-        description="Practical guides for owner-operators — cost per mile, profit per mile, IFTA filing, bookkeeping, deadhead, per diem, and expense tracking. Written for one-truck operators, not fleets."
+        description="Practical guides for owner-operators — cost per mile, profit per mile, IFTA, bookkeeping, deadhead, and expenses. Written for one-truck operators, not fleets."
         path="/blog"
         jsonLd={jsonLd}
       />
@@ -40,8 +41,38 @@ export function BlogIndexPage() {
           </p>
         </div>
       </section>
-      <section className="section section--alt blog-index">
+      <section className="section section--alt">
         <div className="container">
+          <div className="section__header">
+            <p className="eyebrow">Start with a hub</p>
+            <h2 className="section__title">Three stacks. Every guide in order.</h2>
+          </div>
+          <div className="blog-grid">
+            {hubs.map((hub) => (
+              <article key={hub.slug} className="blog-card">
+                <p className="blog-card__meta">
+                  <span>{hub.category}</span>
+                  <span aria-hidden>·</span>
+                  <span>{hub.posts.length} guides</span>
+                </p>
+                <h2 className="blog-card__title">
+                  <Link to={`/blog/${hub.slug}`}>{hub.title}</Link>
+                </h2>
+                <p className="blog-card__excerpt">{hub.excerpt}</p>
+                <Link to={`/blog/${hub.slug}`} className="blog-card__more">
+                  Open hub →
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section blog-index">
+        <div className="container">
+          <div className="section__header">
+            <p className="eyebrow">All guides</p>
+            <h2 className="section__title">Every article</h2>
+          </div>
           <div className="blog-grid">
             {posts.map((post) => (
               <article key={post.slug} className="blog-card">

@@ -39,36 +39,65 @@ function upsertJsonLd(id, data) {
   el.textContent = JSON.stringify(data)
 }
 
-export function Seo(props) {
-  const head = computeHead(props)
+export function Seo({
+  title,
+  description,
+  path,
+  type = 'website',
+  jsonLd,
+  faqLd,
+  breadcrumbLd,
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+  ogImage = OG_IMAGE_URL,
+}) {
+  const head = computeHead({ title, description, path, type, jsonLd, faqLd, breadcrumbLd, noindex, publishedTime, modifiedTime, ogImage })
   const recordHead = useContext(HeadContext)
 
-  // Server render (prerender): hand the head data to the collector.
-  // Client render: recordHead is null and the effect below owns <head>.
   if (recordHead) {
     recordHead(head)
   }
 
-  const { fullTitle, canonical, description, type, jsonLd, faqLd, noindex } = head
+  const {
+    fullTitle,
+    canonical,
+    description: desc,
+    type: ogType,
+    jsonLd: primaryLd,
+    faqLd: faqs,
+    breadcrumbLd: crumbs,
+    noindex: robotsNoindex,
+    publishedTime: pub,
+    modifiedTime: mod,
+    ogImage: image,
+  } = head
 
   useEffect(() => {
     document.title = fullTitle
-    upsertMeta('name', 'description', description)
+    upsertMeta('name', 'description', desc)
     upsertMeta('property', 'og:title', fullTitle)
-    upsertMeta('property', 'og:description', description)
+    upsertMeta('property', 'og:description', desc)
     upsertMeta('property', 'og:url', canonical)
-    upsertMeta('property', 'og:type', type)
+    upsertMeta('property', 'og:type', ogType)
     upsertMeta('property', 'og:site_name', SITE_NAME)
-    upsertMeta('property', 'og:image', OG_IMAGE_URL)
+    upsertMeta('property', 'og:locale', 'en_US')
+    upsertMeta('property', 'og:image', image)
+    upsertMeta('property', 'og:image:width', '1200')
+    upsertMeta('property', 'og:image:height', '630')
+    upsertMeta('property', 'og:image:alt', fullTitle)
     upsertMeta('name', 'twitter:card', 'summary_large_image')
     upsertMeta('name', 'twitter:title', fullTitle)
-    upsertMeta('name', 'twitter:description', description)
-    upsertMeta('name', 'twitter:image', OG_IMAGE_URL)
-    upsertMeta('name', 'robots', noindex ? 'noindex, follow' : 'index, follow')
+    upsertMeta('name', 'twitter:description', desc)
+    upsertMeta('name', 'twitter:image', image)
+    upsertMeta('name', 'robots', robotsNoindex ? 'noindex, follow' : 'index, follow')
+    if (pub) upsertMeta('property', 'article:published_time', pub)
+    if (mod) upsertMeta('property', 'article:modified_time', mod)
     upsertLink('canonical', canonical)
-    upsertJsonLd('jsonld-primary', jsonLd)
-    upsertJsonLd('jsonld-faq', faqLd)
-  }, [fullTitle, description, canonical, type, jsonLd, faqLd, noindex])
+    upsertJsonLd('jsonld-primary', primaryLd)
+    upsertJsonLd('jsonld-faq', faqs)
+    upsertJsonLd('jsonld-breadcrumb', crumbs)
+  }, [fullTitle, desc, canonical, ogType, primaryLd, faqs, crumbs, robotsNoindex, pub, mod, image])
 
   return null
 }
