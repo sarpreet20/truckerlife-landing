@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 
-import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from '../config'
+import { OG_IMAGE_URL, SITE_NAME } from '../config'
+import { computeHead, HeadContext } from './seo-head'
 
 function upsertMeta(attr, key, content) {
   if (!content) return
@@ -38,16 +39,17 @@ function upsertJsonLd(id, data) {
   el.textContent = JSON.stringify(data)
 }
 
-export function Seo({
-  title,
-  description = DEFAULT_DESCRIPTION,
-  path = '/',
-  type = 'website',
-  jsonLd,
-  faqLd,
-}) {
-  const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
-  const canonical = `${SITE_URL}${path}`
+export function Seo(props) {
+  const head = computeHead(props)
+  const recordHead = useContext(HeadContext)
+
+  // Server render (prerender): hand the head data to the collector.
+  // Client render: recordHead is null and the effect below owns <head>.
+  if (recordHead) {
+    recordHead(head)
+  }
+
+  const { fullTitle, canonical, description, type, jsonLd, faqLd, noindex } = head
 
   useEffect(() => {
     document.title = fullTitle
@@ -57,14 +59,16 @@ export function Seo({
     upsertMeta('property', 'og:url', canonical)
     upsertMeta('property', 'og:type', type)
     upsertMeta('property', 'og:site_name', SITE_NAME)
+    upsertMeta('property', 'og:image', OG_IMAGE_URL)
     upsertMeta('name', 'twitter:card', 'summary_large_image')
     upsertMeta('name', 'twitter:title', fullTitle)
     upsertMeta('name', 'twitter:description', description)
-    upsertMeta('name', 'robots', 'index, follow')
+    upsertMeta('name', 'twitter:image', OG_IMAGE_URL)
+    upsertMeta('name', 'robots', noindex ? 'noindex, follow' : 'index, follow')
     upsertLink('canonical', canonical)
     upsertJsonLd('jsonld-primary', jsonLd)
     upsertJsonLd('jsonld-faq', faqLd)
-  }, [fullTitle, description, canonical, type, jsonLd, faqLd])
+  }, [fullTitle, description, canonical, type, jsonLd, faqLd, noindex])
 
   return null
 }

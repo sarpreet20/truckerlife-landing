@@ -138,7 +138,7 @@ const SCREENS = {
 function AppScreenshot({ src, alt }) {
   return (
     <div className="app-shot">
-      <img src={src} alt={alt} loading="lazy" decoding="async" />
+      <img src={src} alt={alt} width="473" height="1024" loading="lazy" decoding="async" />
     </div>
   )
 }
@@ -390,7 +390,7 @@ export function HomePage() {
   return (
     <main>
       <Seo
-        title="Trucker Life AI — Miles Up. Money Down. Find Out Why."
+        title="Trucker Life AI — IFTA & Profit Per Mile for Owner-Operators"
         description="The AI co-driver for owner-operators. Track loads, fuel, deadhead, IFTA, and true profit per mile — built for the cab, not the cubicle."
         path="/"
         jsonLd={jsonLd}
