@@ -31,6 +31,14 @@ export function SiteLayout({ children }) {
     }
   }, [location.pathname, location.hash])
 
+  // SPA page views for GA4 (initial load is handled by the gtag config in index.html)
+  useEffect(() => {
+    if (typeof window.gtag !== 'function') return
+    window.gtag('config', 'G-GT89F9EBTJ', {
+      page_path: `${location.pathname}${location.search}${location.hash}`,
+    })
+  }, [location.pathname, location.search, location.hash])
+
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => {
