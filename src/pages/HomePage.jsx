@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import { posts } from '../blog/posts'
+import heroRoad from '../assets/hero-road-v2.jpg'
 import { Seo } from '../components/Seo'
 import { APP_STORE_URL } from '../config'
 import { homeJsonLd } from '../lib/schema'
@@ -379,7 +380,9 @@ export function HomePage() {
         jsonLd={homeJsonLd()}
       />
       <section className="hero" id="top">
-        <div className="hero__bg" aria-hidden />
+        <div className="hero__bg" aria-hidden>
+          <img src={heroRoad} alt="" />
+        </div>
         <div className="container hero__inner">
           <div className="hero__copy">
             <Eyebrow>Your AI co-pilot. Built for the road.</Eyebrow>
@@ -415,9 +418,12 @@ export function HomePage() {
           </div>
 
           <div className="hero__visual">
-            <PhoneMock label="Live dashboard" variant="app">
-              <LiveDashboardMock />
-            </PhoneMock>
+            <div className="hero__product-card">
+              <span className="hero__product-kicker">See the numbers before the road does</span>
+              <PhoneMock label="Live dashboard" variant="app">
+                <LiveDashboardMock />
+              </PhoneMock>
+            </div>
           </div>
         </div>
       </section>
