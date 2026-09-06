@@ -257,8 +257,15 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-line-dark flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="font-mono text-[10.5px] tracking-[0.18em] text-faint text-center sm:text-left">
-            © 2026 TRUCKER LIFE AI · BUILT BETWEEN MILE MARKERS · FOR OWNER-OPERATORS, BY ONE
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+            <div className="font-mono text-[10.5px] tracking-[0.18em] text-faint">
+              © 2026 TRUCKER LIFE AI · BUILT BETWEEN MILE MARKERS · FOR OWNER-OPERATORS, BY ONE
+            </div>
+            <div className="flex items-center gap-3 font-mono text-[10.5px] tracking-[0.18em] text-faint">
+              <a href="/privacy" className="sweep hover:text-chalk transition-colors">PRIVACY</a>
+              <span aria-hidden="true">·</span>
+              <a href="/terms" className="sweep hover:text-chalk transition-colors">TERMS</a>
+            </div>
           </div>
           <div className="flex items-center gap-2 font-mono text-[10.5px] tracking-[0.18em] text-faint">
             <span className="lanes lanes-slow w-10 opacity-60" aria-hidden="true" />
