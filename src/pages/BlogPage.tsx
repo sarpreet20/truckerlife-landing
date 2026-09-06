@@ -1,6 +1,8 @@
-import { BLOG, IconArrow, SITE_URL } from "../data";
+import { Link } from "react-router-dom";
+import { APP_STORE_URL, BLOG, IconArrow } from "../data";
 import { useInView } from "../hooks";
 import { Diamond, PageHeader, Reveal, SEO } from "../shared";
+import { SEO_ROUTES } from "../seoRoutes";
 
 function ArticleRow({ b, i }: { b: (typeof BLOG)[number]; i: number }) {
   const { ref, on } = useInView<HTMLElement>(0.12);
@@ -19,15 +21,13 @@ function ArticleRow({ b, i }: { b: (typeof BLOG)[number]; i: number }) {
           {b.title}
         </h2>
         <p className="mt-4 text-dim leading-relaxed text-[16.5px] max-w-2xl">{b.excerpt}</p>
-        <a
-          href={b.url}
-          target="_blank"
-          rel="noreferrer"
+        <Link
+          to={b.url}
           className="mt-6 inline-flex items-center gap-3 bg-ink text-paper font-bold px-6 py-3 hover:bg-amberdark transition-colors duration-300"
         >
-          Read the guide
+          Open in the app
           <IconArrow className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-        </a>
+        </Link>
       </div>
       <div className="lg:col-span-3">
         <div className="border border-line bg-panel p-5">
@@ -59,11 +59,7 @@ const EXTRA_GUIDES = [
 export default function BlogPage() {
   return (
     <>
-      <SEO
-        path="/blog"
-        title="Owner-Operator Blog — Cost Per Mile, IFTA & Load Math | Trucker Life AI"
-        description="Trucking guides written for owner-operators, not fleet offices: how to calculate cost per mile, an IFTA quarterly playbook, and how to know if a load is profitable before you say yes."
-      />
+      <SEO path="/blog" {...SEO_ROUTES["/blog"]} />
       <PageHeader
         crumb="BLOG"
         eyebrow="WRITTEN FOR THE CAB, NOT THE BOARDROOM"
@@ -79,18 +75,9 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-5 md:px-8">
           <div className="flex flex-wrap items-end justify-between gap-4 mb-4">
             <div>
-              <div className="font-mono text-[10px] tracking-[0.3em] text-faint">FEATURED GUIDES</div>
+              <div className="font-mono text-[10px] tracking-[0.3em] text-faint">FEATURED TOPICS</div>
               <h2 className="font-display uppercase text-3xl md:text-4xl text-ink tracking-wide mt-2">Start with these three.</h2>
             </div>
-            <a
-              href={`${SITE_URL}/blog`}
-              target="_blank"
-              rel="noreferrer"
-              className="group inline-flex items-center gap-3 border-2 border-ink px-6 py-3.5 font-bold text-ink hover:bg-ink hover:text-paper transition-colors duration-300"
-            >
-              Browse all 10 guides
-              <IconArrow className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-            </a>
           </div>
 
           {BLOG.map((b, i) => (
@@ -107,30 +94,30 @@ export default function BlogPage() {
               <div className="lanes absolute top-0 left-0 right-0 opacity-80" aria-hidden="true" />
               <div className="grid lg:grid-cols-12 gap-10">
                 <div className="lg:col-span-4">
-                  <div className="font-mono text-[10px] tracking-[0.3em] text-faint mt-2">REST OF THE SHELF</div>
+                  <div className="font-mono text-[10px] tracking-[0.3em] text-faint mt-2">ON THE ROADMAP</div>
                   <h2 className="font-display uppercase text-3xl md:text-5xl leading-tight mt-3">
-                    Seven more guides,
+                    Seven more topics,
                     <br />
-                    <span className="text-amber">same rules.</span>
+                    <span className="text-amber">coming soon.</span>
                   </h2>
-                  <p className="mt-4 text-dim leading-relaxed max-w-sm">Real numbers, real consequences, no filler. Everything lives on the main blog.</p>
+                  <p className="mt-4 text-dim leading-relaxed max-w-sm">Real numbers, real consequences, no filler — written as the guides go live. Meanwhile, the app already does the math on all of it.</p>
                   <a
-                    href={`${SITE_URL}/blog`}
+                    href={APP_STORE_URL}
                     target="_blank"
                     rel="noreferrer"
                     className="mt-7 inline-flex items-center gap-3 bg-amber text-ink font-bold px-6 py-3.5 hover:bg-chalk transition-colors duration-300"
                   >
-                    Open the blog
+                    Start free trial
                     <IconArrow className="w-4 h-4" />
                   </a>
                 </div>
                 <ul className="lg:col-span-8 grid sm:grid-cols-2 gap-x-10 content-start">
                   {EXTRA_GUIDES.map((g, i) => (
-                    <li key={g} className="flex items-start gap-4 border-b border-line-dark py-4 group cursor-default">
+                    <li key={g} className="flex items-start gap-4 border-b border-line-dark py-4">
                       <span className="font-mono text-[10px] text-amber mt-1.5 shrink-0">{String(i + 4).padStart(2, "0")}</span>
-                      <a href={`${SITE_URL}/blog`} target="_blank" rel="noreferrer" className="font-semibold text-chalk/90 leading-snug group-hover:text-amber transition-colors duration-300 text-[16px]">
+                      <span className="font-semibold text-chalk/60 leading-snug text-[16px]">
                         {g}
-                      </a>
+                      </span>
                     </li>
                   ))}
                 </ul>

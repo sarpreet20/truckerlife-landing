@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useInView } from "../hooks";
 import { FEATURES } from "../data";
 import { AppStoreButton, PageHeader, Reveal, SEO } from "../shared";
+import { SEO_ROUTES } from "../seoRoutes";
 
 /* ---------- phone shell (product UI stays in night mode) ---------- */
 function Phone({ children, label }: { children: ReactNode; label: string }) {
@@ -231,11 +232,7 @@ export default function FeaturesPage() {
 
   return (
     <>
-      <SEO
-        path="/features"
-        title="Features — Voice Logging, True Rate, IFTA & Tax Records | Trucker Life AI"
-        description="Five tools built for the cab: voice-load logging, a true rate calculator with deadhead included, IFTA reports by state, an AI advisor, and tax-ready records. Made for owner-operators."
-      />
+      <SEO path="/features" {...SEO_ROUTES["/features"]} />
       <PageHeader
         crumb="FEATURES"
         eyebrow="BUILT FOR THE CAB, NOT THE CUBICLE"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useInView } from "../hooks";
 import { COST_TABLE } from "../data";
 import { AppStoreButton, PageHeader, Reveal, SectionHead, SEO } from "../shared";
+import { SEO_ROUTES } from "../seoRoutes";
 
 type Slider = {
   key: string; label: string; unit: string; min: number; max: number; step: number; fmt: (v: number) => string;
@@ -51,11 +52,7 @@ export default function CalculatorPage() {
 
   return (
     <>
-      <SEO
-        path="/calculator"
-        title="True Rate Calculator for Owner-Operators — Deadhead-Included RPM | Trucker Life AI"
-        description="Free true rate per mile calculator for owner-operators. See what a load really pays after deadhead miles, diesel, and detention — before you say yes to the broker."
-      />
+      <SEO path="/calculator" {...SEO_ROUTES["/calculator"]} />
       <PageHeader
         crumb="TRUE RATE CALCULATOR"
         eyebrow="BEFORE YOU SAY YES TO THE BROKER"

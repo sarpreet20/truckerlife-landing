@@ -1,15 +1,13 @@
 import { IconCheck, TIMELINE } from "../data";
 import { useInView } from "../hooks";
 import { AppStoreButton, PageHeader, Reveal, SectionHead, SEO } from "../shared";
+import { SEO_ROUTES } from "../seoRoutes";
+import founderDusk from "../assets/founder-dusk.jpg";
 
 export default function StoryPage() {
   return (
     <>
-      <SEO
-        path="/story"
-        title="Built by an Owner-Operator — Our Story | Trucker Life AI"
-        description="Trucker Life AI was built by an owner-operator with ten years behind the wheel — because every trucking app was designed for dispatchers, not drivers. This is why it exists."
-      />
+      <SEO path="/story" {...SEO_ROUTES["/story"]} />
       <PageHeader
         crumb="OUR STORY"
         eyebrow="TEN YEARS BEHIND THE WHEEL"
@@ -27,8 +25,12 @@ export default function StoryPage() {
           <Reveal className="lg:col-span-5 lg:sticky lg:top-32">
             <div className="kenburns relative aspect-[4/5] border-2 border-ink shadow-[12px_12px_0_rgba(255,180,0,0.6)]">
               <img
-                src="https://image.qwenlm.ai/generated-images/aa1c436d-a302-462f-af13-b700af941c49/_result.png"
+                src={founderDusk}
                 alt="An owner-operator standing beside his truck at dusk, checking numbers on his phone"
+                width={960}
+                height={1200}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover bg-panel"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-coal/70 via-transparent to-transparent" aria-hidden="true" />

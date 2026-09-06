@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useCountUp, useInView, usePRM } from "../hooks";
 import { BLOG, FEATURES, IconArrow, IconCheck, LOADS, PROBLEMS } from "../data";
 import { AppStoreButton, Marquee, Reveal, SectionHead, SEO } from "../shared";
+import { SEO_ROUTES } from "../seoRoutes";
+import heroCabNight from "../assets/hero-cab-night.jpg";
 
 /* ================= live ledger dashboard ================= */
 
@@ -445,8 +447,12 @@ function Testimonial() {
   return (
     <section className="relative min-h-[58vh] md:min-h-[72vh] flex items-center overflow-hidden kenburns">
       <img
-        src="https://image.qwenlm.ai/generated-images/a1a26a87-b064-46b8-a186-f5f1095ee0c9/_result.png"
+        src={heroCabNight}
         alt="View from inside a truck cab at night on an open highway"
+        width={1920}
+        height={1080}
+        loading="lazy"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover bg-coal"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/85 to-paper/25" aria-hidden="true" />
@@ -512,11 +518,9 @@ function BlogPreview() {
 function BlogCard({ b, delay }: { b: (typeof BLOG)[number]; delay: number }) {
   const { ref, on } = useInView<HTMLAnchorElement>(0.15);
   return (
-    <a
+    <Link
       ref={ref}
-      href={b.url}
-      target="_blank"
-      rel="noreferrer"
+      to={b.url}
       className={`rv ${on ? "on" : ""} group flex flex-col border border-line bg-panel p-6 hover:border-ink hover:-translate-y-1.5 hover:shadow-[8px_8px_0_rgba(255,180,0,0.85)] transition-all duration-400`}
       style={{ transitionDelay: `${delay}ms` }}
     >
@@ -527,12 +531,12 @@ function BlogCard({ b, delay }: { b: (typeof BLOG)[number]; delay: number }) {
       <h3 className="mt-4 font-display uppercase text-xl leading-tight text-ink tracking-wide">{b.title}</h3>
       <p className="mt-3 text-dim text-[15px] leading-relaxed flex-1">{b.excerpt}</p>
       <div className="mt-5 pt-4 border-t border-dashed border-line flex items-center justify-between">
-        <span className="font-mono text-[10.5px] tracking-[0.18em] text-faint">8 MIN READ</span>
+        <span className="font-mono text-[10.5px] tracking-[0.18em] text-faint">IN THE APP</span>
         <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.15em] text-ink font-semibold group-hover:text-amberdark">
-          READ <IconArrow className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
+          OPEN <IconArrow className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
         </span>
       </div>
-    </a>
+    </Link>
   );
 }
 
@@ -579,11 +583,7 @@ function FinalCTA() {
 export default function Home() {
   return (
     <>
-      <SEO
-        path="/"
-        title="Trucker Life AI — IFTA, True Rate Per Mile & Tax Records for Owner-Operators"
-        description="The owner-operator's AI co-driver. Voice-log loads at highway speed, see your true rate per mile with deadhead included, and file IFTA and taxes without the all-nighter. Free 14-day trial on iOS."
-      />
+      <SEO path="/" {...SEO_ROUTES["/"]} />
       <Hero />
       <Marquee />
       <BleedReport />

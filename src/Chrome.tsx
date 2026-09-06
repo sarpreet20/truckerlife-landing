@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { APP_STORE_URL, IconApple, IconArrow, Logo, SITE_URL, TICKER } from "./data";
+import { APP_STORE_URL, IconApple, IconArrow, Logo, TICKER } from "./data";
 import { Marquee } from "./shared";
 
 export const NAV_LINKS = [
@@ -179,9 +179,9 @@ const FOOT_LINKS: { head: string; links: [string, string, boolean][] }[] = [
     head: "RESOURCES",
     links: [
       ["Owner-Operator Blog", "/blog", false],
-      ["Cost Per Mile Guide", `${SITE_URL}/blog/owner-operator-cost-per-mile`, true],
-      ["IFTA Playbook", `${SITE_URL}/blog/ifta-filing-for-owner-operators`, true],
-      ["Load Profit Guide", `${SITE_URL}/blog/how-to-know-if-a-load-is-profitable`, true],
+      ["Cost Per Mile Guide", "/calculator", false],
+      ["IFTA Playbook", "/ifta", false],
+      ["Load Profit Guide", "/calculator", false],
     ],
   },
   {

@@ -1,5 +1,20 @@
 {
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/blog/owner-operator-numbers", "destination": "/blog", "permanent": true },
+    { "source": "/blog/ifta-and-taxes", "destination": "/ifta", "permanent": true },
+    { "source": "/blog/trucking-bookkeeping", "destination": "/blog", "permanent": true },
+    { "source": "/blog/owner-operator-cost-per-mile", "destination": "/calculator", "permanent": true },
+    { "source": "/blog/owner-operator-profit-per-mile", "destination": "/calculator", "permanent": true },
+    { "source": "/blog/ifta-filing-for-owner-operators", "destination": "/ifta", "permanent": true },
+    { "source": "/blog/trucking-bookkeeping-for-owner-operators", "destination": "/blog", "permanent": true },
+    { "source": "/blog/deadhead-miles-owner-operator", "destination": "/calculator", "permanent": true },
+    { "source": "/blog/owner-operator-tax-deductions", "destination": "/pricing", "permanent": true },
+    { "source": "/blog/how-to-know-if-a-load-is-profitable", "destination": "/calculator", "permanent": true },
+    { "source": "/blog/owner-operator-per-diem", "destination": "/blog", "permanent": true },
+    { "source": "/blog/owner-operator-fuel-log", "destination": "/features", "permanent": true },
+    { "source": "/blog/owner-operator-expenses-checklist", "destination": "/pricing", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

@@ -6,7 +6,19 @@ import { APP_STORE_URL, IconApple, MARQUEE_LINES, SITE_URL } from "./data";
 
 /* ================= per-page SEO ================= */
 
-export function SEO({ title, description, path, jsonLd }: { title: string; description: string; path: string; jsonLd?: object }) {
+export function SEO({
+  title,
+  description,
+  path,
+  jsonLd,
+  noindex = false,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  jsonLd?: object;
+  noindex?: boolean;
+}) {
   useEffect(() => {
     document.title = title;
     const setMeta = (attr: "name" | "property", key: string, content: string) => {
@@ -19,9 +31,14 @@ export function SEO({ title, description, path, jsonLd }: { title: string; descr
       el.setAttribute("content", content);
     };
     setMeta("name", "description", description);
+    setMeta("name", "robots", noindex ? "noindex, follow" : "index, follow");
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
-    setMeta("property", "og:url", `${SITE_URL}/#${path}`);
+    setMeta("property", "og:url", `${SITE_URL}${path}`);
+    setMeta("property", "og:image", `${SITE_URL}/og-image.png`);
+    setMeta("name", "twitter:title", title);
+    setMeta("name", "twitter:description", description);
+    setMeta("name", "twitter:image", `${SITE_URL}/og-image.png`);
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
@@ -29,7 +46,7 @@ export function SEO({ title, description, path, jsonLd }: { title: string; descr
       canonical.setAttribute("rel", "canonical");
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute("href", path === "/" ? `${SITE_URL}/` : `${SITE_URL}/#${path}`);
+    canonical.setAttribute("href", `${SITE_URL}${path}`);
 
     let ld = document.getElementById("page-jsonld");
     if (jsonLd) {
@@ -44,7 +61,7 @@ export function SEO({ title, description, path, jsonLd }: { title: string; descr
       ld.remove();
     }
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [title, description, path, jsonLd]);
+  }, [title, description, path, jsonLd, noindex]);
   return null;
 }
 

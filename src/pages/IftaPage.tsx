@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { IFTA_QUARTERS } from "../data";
 import { AppStoreButton, PageHeader, Reveal, SectionHead, SEO } from "../shared";
+import { SEO_ROUTES } from "../seoRoutes";
 
 function nextDeadline() {
   const now = new Date();
@@ -53,11 +54,7 @@ export default function IftaPage() {
 
   return (
     <>
-      <SEO
-        path="/ifta"
-        title="IFTA Filing for Owner-Operators — Quarterly Reports by State | Trucker Life AI"
-        description="IFTA isn't hard math, it's a records problem. Trucker Life AI logs miles and fuel by state as you drive, so your quarterly IFTA report is ready before the deadline. Deadlines: Apr 30, Jul 31, Oct 31, Jan 31."
-      />
+      <SEO path="/ifta" {...SEO_ROUTES["/ifta"]} />
       <PageHeader
         crumb="IFTA CENTER"
         eyebrow="THE QUARTERLY ALL-NIGHTER, CANCELED"

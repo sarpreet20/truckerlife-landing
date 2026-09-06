@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FAQS, IconCheck } from "../data";
 import { AppStoreButton, PageHeader, Reveal, SectionHead, SEO } from "../shared";
+import { SEO_ROUTES } from "../seoRoutes";
 
 const FREE_FEATURES = ["Voice logging", "Load tracking", "Fuel entries", "Basic reports", "IFTA tracking"];
 const PRO_FEATURES = ["Everything in Free", "Unlimited loads", "AI Advisor weekly brief", "Full IFTA reports by state", "Tax Center & deduction tracking", "PDF exports for your CPA", "Priority support — real truckers"];
@@ -43,24 +44,9 @@ function Faq() {
 }
 
 export default function PricingPage() {
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQS.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
-
   return (
     <>
-      <SEO
-        path="/pricing"
-        title="Pricing — Free 14-Day Trial, Pro $29/mo | Trucker Life AI"
-        description="Start free for 14 days — voice logging, load tracking, fuel entries, and IFTA tracking. Pro adds unlimited loads, the AI Advisor, full IFTA reports, and the Tax Center for $29/month. Cancel anytime."
-        jsonLd={faqJsonLd}
-      />
+      <SEO path="/pricing" {...SEO_ROUTES["/pricing"]} />
       <PageHeader
         crumb="PRICING"
         eyebrow="THE MATH ON THE MATH TOOL"

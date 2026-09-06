@@ -1,13 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App.tsx";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root")!;
+const app = (
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter>
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
+
+if (root.hasChildNodes()) {
+  ReactDOM.hydrateRoot(root, app, {
+    onRecoverableError: (error, errorInfo) => {
+      console.error("[hydration]", error, errorInfo?.componentStack);
+    },
+  });
+} else {
+  ReactDOM.createRoot(root).render(app);
+}

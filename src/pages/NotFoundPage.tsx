@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
 import { IconArrow } from "../data";
 import { SEO } from "../shared";
+import { SEO_ROUTES } from "../seoRoutes";
 
 export default function NotFoundPage() {
   return (
     <>
-      <SEO
-        path="/404"
-        title="Exit Not Found — Trucker Life AI"
-        description="This exit doesn't exist. Head back to the Interstate — IFTA, true rate per mile, and tax records for owner-operators."
-      />
+      <SEO path="/404" {...SEO_ROUTES["/404"]} />
       <section className="relative min-h-screen bg-coal text-chalk flex items-center overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.05] pointer-events-none"
