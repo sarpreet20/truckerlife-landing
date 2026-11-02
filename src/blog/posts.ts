@@ -22,7 +22,7 @@ export const posts: Post[] = [
     title: 'How to Calculate Cost Per Mile as an Owner-Operator',
     metaTitle: 'Owner-Operator Rates Per Mile vs. Cost Per Mile (2026)',
     metaDescription:
-      'Owner-operator trucking rates per mile only matter next to your cost per mile. Calculate yours — truck payment, fuel, insurance, deadhead — and the rate you need to book.',
+      'Owner-operator trucking rates per mile only matter next to your cost per mile. Calculate yours and the rate you need before you book a load.',
     keyword: 'owner operator cost per mile',
     date: '2026-09-04',
     updated: '2026-09-05',
@@ -458,7 +458,7 @@ Trucker Life AI is built for owner-operators — fuel and miles in one place so 
     title: 'Trucking Bookkeeping for Owner-Operators: What to Track Every Week',
     metaTitle: 'Bookkeeping for Truckers: Owner-Operator Weekly System',
     metaDescription:
-      'Bookkeeping for truckers who run their own truck: settlements, fuel, expenses, miles, and a weekly rhythm so tax season is export-and-file — not glovebox archaeology.',
+      'Bookkeeping for truckers who run their own truck: settlements, fuel, expenses, and miles in a weekly rhythm, so tax season is export-and-file.',
     keyword: 'trucking bookkeeping for owner operators',
     date: '2026-08-28',
     readMinutes: 5,
@@ -1186,7 +1186,7 @@ Trucker Life AI is owner-operator only. Log fuel when it happens and keep it nex
     title: 'Trucking Expenses List for Owner-Operators: What to Log Every Week',
     metaTitle: 'Trucking Expenses List: Owner-Operator Checklist (2026)',
     metaDescription:
-      'The trucking expenses list owner-operators should log weekly: fuel, maintenance, insurance, tolls, parking, per diem, and the small cab costs that vanish if you only log big invoices.',
+      'The trucking expenses list owner-operators should log weekly: fuel, maintenance, insurance, tolls, parking, per diem, and small cab costs.',
     keyword: 'trucking expenses list',
     date: '2026-08-10',
     readMinutes: 5,

@@ -265,6 +265,8 @@ export function Footer() {
               <a href="/privacy" className="sweep hover:text-chalk transition-colors">PRIVACY</a>
               <span aria-hidden="true">·</span>
               <a href="/terms" className="sweep hover:text-chalk transition-colors">TERMS</a>
+              <span aria-hidden="true">·</span>
+              <a href="/legal" className="sweep hover:text-chalk transition-colors">LEGAL</a>
             </div>
           </div>
           <div className="flex items-center gap-2 font-mono text-[10.5px] tracking-[0.18em] text-faint">
