@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, "..");
 const distDir = path.join(root, "dist");
 const SITE_URL = "https://www.truckerlifeai.com";
 
-const { render, SEO_ROUTES } = await import(
+const { render, SEO_ROUTES, posts } = await import(
   path.join(root, "dist-ssr", "entry-server.js")
 );
 
@@ -66,5 +66,46 @@ for (const routePath of routes) {
   fs.writeFileSync(outPath, html);
   console.log(`prerendered ${routePath} -> ${path.relative(distDir, outPath)}`);
 }
+
+/* ---- sitemap.xml + rss.xml generated from the same route/post data ---- */
+const today = new Date().toISOString().slice(0, 10);
+const postBySlugPath = new Map(posts.map((p) => [`/blog/${p.slug}`, p]));
+const STATIC_EXTRA = ["/legal", "/privacy", "/terms"];
+
+function priority(routePath) {
+  if (routePath === "/") return "1.0";
+  if (postBySlugPath.has(routePath)) return "0.7";
+  if (routePath === "/blog") return "0.7";
+  return "0.8";
+}
+
+const sitemapRoutes = [...routes.filter((r) => r !== "/404" && !SEO_ROUTES[r].noindex), ...STATIC_EXTRA];
+const urlEntries = sitemapRoutes
+  .map((r) => {
+    const post = postBySlugPath.get(r);
+    const lastmod = post ? post.updated || post.date : today;
+    const loc = r === "/" ? `${SITE_URL}/` : `${SITE_URL}${r}`;
+    const pr = STATIC_EXTRA.includes(r) ? "0.3" : priority(r);
+    return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <priority>${pr}</priority>\n  </url>`;
+  })
+  .join("\n");
+fs.writeFileSync(
+  path.join(distDir, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries}\n</urlset>\n`
+);
+console.log(`wrote sitemap.xml (${sitemapRoutes.length} urls)`);
+
+const items = [...posts]
+  .sort((a, b) => (b.date > a.date ? 1 : -1))
+  .map(
+    (p) =>
+      `    <item>\n      <title>${escapeHtml(p.title)}</title>\n      <link>${SITE_URL}/blog/${p.slug}</link>\n      <guid>${SITE_URL}/blog/${p.slug}</guid>\n      <pubDate>${new Date(p.date).toUTCString()}</pubDate>\n      <description>${escapeHtml(p.metaDescription)}</description>\n    </item>`
+  )
+  .join("\n");
+fs.writeFileSync(
+  path.join(distDir, "rss.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>Trucker Life AI</title>\n    <link>${SITE_URL}/</link>\n    <description>Owner-operator guides: cost per mile, IFTA, bookkeeping, and true rate.</description>\n    <language>en-us</language>\n    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>\n${items}\n  </channel>\n</rss>\n`
+);
+console.log(`wrote rss.xml (${posts.length} items)`);
 
 fs.rmSync(path.join(root, "dist-ssr"), { recursive: true, force: true });

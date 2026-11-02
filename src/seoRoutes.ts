@@ -1,4 +1,5 @@
-import { FAQS } from "./data";
+import { FAQS, SITE_URL } from "./data";
+import { posts } from "./blog/posts";
 
 export type RouteMeta = { title: string; description: string; jsonLd?: object; noindex?: boolean };
 
@@ -61,3 +62,56 @@ export const SEO_ROUTES: Record<string, RouteMeta> = {
     noindex: true,
   },
 };
+
+const AUTHOR = { "@type": "Person", name: "Sarpreet Singh", url: `${SITE_URL}/story` };
+const PUBLISHER = {
+  "@type": "Organization",
+  name: "Trucker Life AI",
+  url: SITE_URL,
+  logo: { "@type": "ImageObject", url: `${SITE_URL}/apple-touch-icon.png`, width: 180, height: 180 },
+};
+
+for (const post of posts) {
+  const path = `/blog/${post.slug}`;
+  const url = `${SITE_URL}${path}`;
+  const modified = post.updated || post.date;
+  const graph: object[] = [
+    {
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.metaDescription,
+      image: [`${SITE_URL}/og-image.png`],
+      datePublished: post.date,
+      dateModified: modified,
+      keywords: post.keyword,
+      author: AUTHOR,
+      publisher: PUBLISHER,
+      mainEntityOfPage: { "@type": "WebPage", "@id": url },
+      timeRequired: `PT${post.readMinutes}M`,
+      articleSection: post.category,
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+        { "@type": "ListItem", position: 3, name: post.title, item: url },
+      ],
+    },
+  ];
+  if (post.faq?.length) {
+    graph.push({
+      "@type": "FAQPage",
+      mainEntity: post.faq.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+  }
+  SEO_ROUTES[path] = {
+    title: post.metaTitle,
+    description: post.metaDescription,
+    jsonLd: { "@context": "https://schema.org", "@graph": graph },
+  };
+}

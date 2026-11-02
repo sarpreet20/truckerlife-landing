@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { APP_STORE_URL, BLOG, IconArrow } from "../data";
+import { posts } from "../blog/posts";
 import { useInView } from "../hooks";
 import { Diamond, PageHeader, Reveal, SEO } from "../shared";
 import { SEO_ROUTES } from "../seoRoutes";
@@ -25,7 +26,7 @@ function ArticleRow({ b, i }: { b: (typeof BLOG)[number]; i: number }) {
           to={b.url}
           className="mt-6 inline-flex items-center gap-3 bg-ink text-paper font-bold px-6 py-3 hover:bg-amberdark transition-colors duration-300"
         >
-          Open in the app
+          Read the guide
           <IconArrow className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
         </Link>
       </div>
@@ -46,16 +47,6 @@ function ArticleRow({ b, i }: { b: (typeof BLOG)[number]; i: number }) {
   );
 }
 
-const EXTRA_GUIDES = [
-  "Deadhead: the silent margin killer — and how to price it",
-  "Detention pay: what to ask for before you wait",
-  "Fuel cards vs. cash price: running the real numbers",
-  "Escrow accounts: what the contract won't explain",
-  "Lease-on vs. authority: the first-year math",
-  "Preventive maintenance schedule that pays for itself",
-  "Quarterly estimated taxes without the April panic",
-];
-
 export default function BlogPage() {
   return (
     <>
@@ -68,7 +59,7 @@ export default function BlogPage() {
           <span key="a">can <span className="text-amber">use today.</span></span>,
         ]}
         lede="Cost per mile, IFTA, load math, and the fine print brokers count on you skipping. Every guide is written by someone who has run the lanes — no theory, all ledger."
-        meta={[["GUIDES", "10+"], ["READING LEVEL", "TRUCKER"], ["FLUFF", "0%"]]}
+        meta={[["GUIDES", String(posts.length)], ["READING LEVEL", "TRUCKER"], ["FLUFF", "0%"]]}
       />
 
       <section className="py-12 md:py-14">
@@ -94,13 +85,13 @@ export default function BlogPage() {
               <div className="lanes absolute top-0 left-0 right-0 opacity-80" aria-hidden="true" />
               <div className="grid lg:grid-cols-12 gap-10">
                 <div className="lg:col-span-4">
-                  <div className="font-mono text-[10px] tracking-[0.3em] text-faint mt-2">ON THE ROADMAP</div>
+                  <div className="font-mono text-[10px] tracking-[0.3em] text-faint mt-2">ALL GUIDES</div>
                   <h2 className="font-display uppercase text-3xl md:text-5xl leading-tight mt-3">
-                    Seven more topics,
+                    Every guide,
                     <br />
-                    <span className="text-amber">coming soon.</span>
+                    <span className="text-amber">one shelf.</span>
                   </h2>
-                  <p className="mt-4 text-dim leading-relaxed max-w-sm">Real numbers, real consequences, no filler — written as the guides go live. Meanwhile, the app already does the math on all of it.</p>
+                  <p className="mt-4 text-dim leading-relaxed max-w-sm">Real numbers, real consequences, no filler. And the app already does the math on all of it.</p>
                   <a
                     href={APP_STORE_URL}
                     target="_blank"
@@ -112,12 +103,12 @@ export default function BlogPage() {
                   </a>
                 </div>
                 <ul className="lg:col-span-8 grid sm:grid-cols-2 gap-x-10 content-start">
-                  {EXTRA_GUIDES.map((g, i) => (
-                    <li key={g} className="flex items-start gap-4 border-b border-line-dark py-4">
-                      <span className="font-mono text-[10px] text-amber mt-1.5 shrink-0">{String(i + 4).padStart(2, "0")}</span>
-                      <span className="font-semibold text-chalk/60 leading-snug text-[16px]">
-                        {g}
-                      </span>
+                  {posts.map((p, i) => (
+                    <li key={p.slug} className="border-b border-line-dark">
+                      <Link to={`/blog/${p.slug}`} className="group flex items-start gap-4 py-4">
+                        <span className="font-mono text-[10px] text-amber mt-1.5 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                        <span className="font-semibold text-chalk leading-snug text-[16px] group-hover:text-amber transition-colors">{p.title}</span>
+                      </Link>
                     </li>
                   ))}
                 </ul>

@@ -14,3 +14,4 @@ export function render(path: string) {
 }
 
 export { SEO_ROUTES } from "./seoRoutes";
+export { posts } from "./blog/posts";

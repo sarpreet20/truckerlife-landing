@@ -531,9 +531,9 @@ function BlogCard({ b, delay }: { b: (typeof BLOG)[number]; delay: number }) {
       <h3 className="mt-4 font-display uppercase text-xl leading-tight text-ink tracking-wide">{b.title}</h3>
       <p className="mt-3 text-dim text-[15px] leading-relaxed flex-1">{b.excerpt}</p>
       <div className="mt-5 pt-4 border-t border-dashed border-line flex items-center justify-between">
-        <span className="font-mono text-[10.5px] tracking-[0.18em] text-faint">IN THE APP</span>
+        <span className="font-mono text-[10.5px] tracking-[0.18em] text-faint">READ THE GUIDE</span>
         <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.15em] text-ink font-semibold group-hover:text-amberdark">
-          OPEN <IconArrow className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
+          READ <IconArrow className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
         </span>
       </div>
     </Link>

@@ -252,7 +252,7 @@ export const BLOG: BlogPost[] = [
     category: "NUMBERS · TOOL",
     title: "How to Calculate Cost Per Mile as an Owner-Operator",
     excerpt: "Rate per mile is what the broker quotes. Cost per mile is what your truck actually spends. The gap between those two numbers is your entire business — and most owner-operators have never measured it.",
-    url: "/calculator",
+    url: "/blog/owner-operator-cost-per-mile",
     takeaways: ["Split costs into fixed and variable — they behave differently", "Use real miles, not book miles: empty miles cost money too", "Re-run the number when diesel moves 25¢ or more"],
   },
   {
@@ -260,7 +260,7 @@ export const BLOG: BlogPost[] = [
     category: "IFTA & TAXES · TOOL",
     title: "IFTA Filing for Owner-Operators: A Quarterly Playbook That Takes Hours, Not Weekends",
     excerpt: "IFTA isn't hard math — it's a records problem. Log miles and fuel by state each week and you file in an afternoon. Rebuild it from receipts at the end of the quarter and you file in a lost weekend.",
-    url: "/ifta",
+    url: "/blog/ifta-filing-for-owner-operators",
     takeaways: ["Four deadlines a year: Apr 30, Jul 31, Oct 31, Jan 31", "What matters is miles and fuel per state — track both weekly", "Late filings compound: penalties stack per jurisdiction"],
   },
   {
@@ -268,7 +268,7 @@ export const BLOG: BlogPost[] = [
     category: "LOADS · TOOL",
     title: "How Owner-Operators Know If a Load Is Profitable Before They Say Yes",
     excerpt: "A profitable load isn't a high loaded RPM. It's a true rate above your cost per mile — after deadhead, fuel, and the extras the broker forgot to mention. Here's the full checklist.",
-    url: "/calculator",
+    url: "/blog/how-to-know-if-a-load-is-profitable",
     takeaways: ["Price the total miles, not just the loaded ones", "Know your break-even before the broker calls", "A detention clause is part of the rate — negotiate it"],
   },
 ];

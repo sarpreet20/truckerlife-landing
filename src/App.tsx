@@ -8,6 +8,7 @@ import CalculatorPage from "./pages/CalculatorPage";
 import IftaPage from "./pages/IftaPage";
 import PricingPage from "./pages/PricingPage";
 import BlogPage from "./pages/BlogPage";
+import BlogPostPage from "./pages/BlogPostPage";
 import StoryPage from "./pages/StoryPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/ifta" element={<IftaPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/story" element={<StoryPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
