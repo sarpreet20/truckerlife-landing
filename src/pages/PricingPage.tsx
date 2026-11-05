@@ -54,8 +54,8 @@ export default function PricingPage() {
           "One caught lowball",
           <span key="a">pays for <span className="text-amber">a year.</span></span>,
         ]}
-        lede="Pro costs $29 a month. One load you don't run at $1.17 when you thought it was $2.10 saves more than that. Everything after is profit — including your evenings."
-        meta={[["TRIAL", "14 DAYS FREE"], ["PRO", "$29/MO"], ["CONTRACTS", "NONE"]]}
+        lede="Pro costs $19.99 a month, or $99 a year. One load you don't run at $1.17 when you thought it was $2.10 saves more than that. Everything after is profit — including your evenings."
+        meta={[["TRIAL", "14 DAYS FREE"], ["PRO", "$19.99/MO · $99/YR"], ["CONTRACTS", "NONE"]]}
       />
 
       {/* plans */}
@@ -98,8 +98,9 @@ export default function PricingPage() {
                       <h2 className="font-display uppercase text-5xl md:text-6xl text-ink mt-2">Pro</h2>
                     </div>
                     <div className="text-right">
-                      <div className="font-display text-4xl md:text-5xl text-amberdark">$29</div>
+                      <div className="font-display text-4xl md:text-5xl text-amberdark">$19.99</div>
                       <div className="font-mono text-[10px] tracking-[0.2em] text-faint mt-1">PER MONTH</div>
+                      <div className="font-mono text-[10px] tracking-[0.2em] text-ink mt-2">OR $99/YEAR · SAVE 58%</div>
                     </div>
                   </div>
                   <ul className="mt-6 space-y-3.5 flex-1">
@@ -146,7 +147,7 @@ export default function PricingPage() {
                 <div className="grid md:grid-cols-12 gap-1.5 md:gap-6 px-6 py-6 items-baseline bg-ink text-paper">
                   <div className="md:col-span-4 font-display uppercase text-lg tracking-wide">Monthly return, conservatively</div>
                   <div className="md:col-span-2 font-display text-4xl text-amber tabular-nums">+$1,942</div>
-                  <div className="md:col-span-6 font-mono text-[11px] tracking-[0.12em] text-paper/60">PRO COSTS $29 OF IT. YOU KEEP THE REST.</div>
+                  <div className="md:col-span-6 font-mono text-[11px] tracking-[0.12em] text-paper/60">PRO COSTS $19.99 OF IT. YOU KEEP THE REST.</div>
                 </div>
               </div>
             </div>

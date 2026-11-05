@@ -240,7 +240,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "Does it really pay for itself?",
-    a: "One caught lowball — say a $2.10 quote that's really $1.17 after 318 deadhead miles — saves $300–$500. Pro costs $29. The math isn't close. Then add the hours back: most owner-operators get six-plus a month away from paperwork.",
+    a: "One caught lowball — say a $2.10 quote that's really $1.17 after 318 deadhead miles — saves $300–$500. Pro costs $19.99 a month, or $99 a year. The math isn't close. Then add the hours back: most owner-operators get six-plus a month away from paperwork.",
   },
 ];
 

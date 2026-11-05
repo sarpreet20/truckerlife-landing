@@ -40,9 +40,9 @@ export const SEO_ROUTES: Record<string, RouteMeta> = {
       "IFTA isn't hard math, it's a records problem. Log miles and fuel by state as you drive so your quarterly report is ready before the deadline.",
   },
   "/pricing": {
-    title: "Pricing — Free Trial, Pro $29/mo | Trucker Life AI",
+    title: "Pricing — Free Trial, Pro $19.99/mo | Trucker Life AI",
     description:
-      "Start free for 14 days with voice logging, load tracking, and IFTA tracking. Pro adds unlimited loads, the AI Advisor, and the Tax Center for $29/month.",
+      "Start free for 14 days with voice logging, load tracking, and IFTA tracking. Pro adds unlimited loads, the AI Advisor, and the Tax Center for $19.99/month or $99/year.",
     jsonLd: faqJsonLd,
   },
   "/blog": {
